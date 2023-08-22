@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="39df2223-d682-418a-a5b8-c23a63a853dc" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\Maven\maven_repository" />
+        <option name="mavenHome" value="D:/Maven/apache-maven-3.3.9-bin" />
+        <option name="userSettingsFile" value="D:\Maven\apache-maven-3.3.9-bin\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2RpAP8W4JGz5qymqrn9j6VFJBSM" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "F:/Apifox/data",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "spring.configuration.checksum": "d71146c7676d17a0978453d10f80a2f8",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RunManager" selected="Spring Boot.FastDeerEndApplication">
+    <configuration name="JWTTokenTests.getTokenForRedis" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fastdeer-end" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deer.fastdeerend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.deer.fastdeerend" />
+      <option name="MAIN_CLASS_NAME" value="com.deer.fastdeerend.JWTTokenTests" />
+      <option name="METHOD_NAME" value="getTokenForRedis" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JWTTokenTests.testAddToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fastdeer-end" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deer.fastdeerend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.deer.fastdeerend" />
+      <option name="MAIN_CLASS_NAME" value="com.deer.fastdeerend.JWTTokenTests" />
+      <option name="METHOD_NAME" value="testAddToken" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JWTTokenTests.testToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fastdeer-end" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deer.fastdeerend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.deer.fastdeerend" />
+      <option name="MAIN_CLASS_NAME" value="com.deer.fastdeerend.JWTTokenTests" />
+      <option name="METHOD_NAME" value="testToken" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JWTTokenTests.testVerify" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fastdeer-end" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deer.fastdeerend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.deer.fastdeerend" />
+      <option name="MAIN_CLASS_NAME" value="com.deer.fastdeerend.JWTTokenTests" />
+      <option name="METHOD_NAME" value="testVerify" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserTests.testAddUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fastdeer-end" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deer.fastdeerend.common.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.deer.fastdeerend" />
+      <option name="MAIN_CLASS_NAME" value="com.deer.fastdeerend.UserTests" />
+      <option name="METHOD_NAME" value="testAddUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FastDeerEndApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="fastdeer-end" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.deer.fastdeerend.FastDeerEndApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.JWTTokenTests.getTokenForRedis" />
+      <item itemvalue="JUnit.JWTTokenTests.testAddToken" />
+      <item itemvalue="JUnit.JWTTokenTests.testToken" />
+      <item itemvalue="JUnit.JWTTokenTests.testVerify" />
+      <item itemvalue="JUnit.UserTests.testAddUser" />
+      <item itemvalue="Spring Boot.FastDeerEndApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.JWTTokenTests.testVerify" />
+        <item itemvalue="JUnit.JWTTokenTests.testAddToken" />
+        <item itemvalue="JUnit.UserTests.testAddUser" />
+        <item itemvalue="JUnit.JWTTokenTests.getTokenForRedis" />
+        <item itemvalue="JUnit.JWTTokenTests.testToken" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="39df2223-d682-418a-a5b8-c23a63a853dc" name="Changes" comment="" />
+      <created>1685883777760</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685883777760</updated>
+      <workItem from="1687936625339" duration="15464000" />
+      <workItem from="1687963464063" duration="7620000" />
+      <workItem from="1688003099487" duration="26337000" />
+      <workItem from="1688050063331" duration="252000" />
+      <workItem from="1688130391677" duration="505000" />
+      <workItem from="1688131043215" duration="11912000" />
+      <workItem from="1688177749828" duration="258000" />
+      <workItem from="1688178024573" duration="46438000" />
+      <workItem from="1688312359401" duration="115000" />
+      <workItem from="1688312488647" duration="43000" />
+      <workItem from="1688312548598" duration="321000" />
+      <workItem from="1688315346980" duration="35000" />
+      <workItem from="1688317256734" duration="919000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://D:/Maven/maven_repository/org/springframework/security/spring-security-web/6.1.1/spring-security-web-6.1.1.jar!/org/springframework/security/web/csrf/CsrfFilter.class</url>
+          <line>50</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://D:/Maven/maven_repository/org/springframework/security/spring-security-config/6.1.1/spring-security-config-6.1.1.jar!/org/springframework/security/config/annotation/web/builders/HttpSecurity.class</url>
+          <line>499</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -1,0 +1,44 @@
+dev:
+  host: http://192.168.158.139:8080
+  mysql:
+#    address: rm-cn-nwy3aocn0000pho.rwlb.rds.aliyuncs.com
+    address: localhost
+#    username: abstyle
+    username: root
+#    password: Fastdeer123
+    password: 12345678
+  redis:
+#    host: r-bp15xrn4toitsx8rgxpd.redis.rds.aliyuncs.com
+    host: 127.0.0.1
+    password: Fastdeer123
+    database: 0
+    port: 6379
+    maxTotal: 30 # 最大连接数
+    maxIdle: 20 # 最大空闲连接数
+
+  staticUrl: file:/Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/
+  maxFileSize: 200
+  maxRequestSize: 400
+  avatarUpload:
+    uploadLocation: /Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/avatar/
+    avatarUrl: ${dev.host}/static/avatar/
+  postUpload:
+    uploadLocation: /Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/post/
+    postUrl: ${dev.host}/static/post/
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://${dev.mysql.address}:3306/fast_deer?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${dev.mysql.username}
+    password: ${dev.mysql.password}
+
+
+fastDeer:
+  jwt:
+    secret: fastDeer8888 # Spring Security 密钥
+    expireTime: 120 # token过期时间， 单位-分钟
+    issuer: fast-deer # JWT签发者
