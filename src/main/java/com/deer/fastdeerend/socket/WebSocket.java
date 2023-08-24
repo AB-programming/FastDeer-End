@@ -1,8 +1,14 @@
 package com.deer.fastdeerend.socket;
 
+import com.deer.fastdeerend.domain.dto.Message;
+import com.deer.fastdeerend.domain.vo.ReceivedMessage;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.Resource;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
+import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,6 +17,8 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @Component
 @ServerEndpoint("/ws/{userId}")
 public class WebSocket {
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     private Session session;
     private String userId;
 
@@ -34,10 +42,13 @@ public class WebSocket {
         System.out.println("【WebSocket】连接断开，总数为：" + webSockets.size());
     }
 
+    @SneakyThrows
     @OnMessage
     public void onMessage(String message) {
         System.out.println("【WebSocket】收到客户端消息:" + message);
-        this.sendOneMessage(this.userId, "已收到，回复");
+        Message mes = this.objectMapper.readValue(message, Message.class);
+        this.sendOneMessage(this.userId, "发送成功", this.userId);
+        this.sendOneMessage(mes.getUserId(), mes.getContent(), mes.getTargetId());
     }
 
     @OnError
@@ -59,15 +70,22 @@ public class WebSocket {
         }
     }
 
-    public void sendOneMessage(String userId, String message) {
-        Session session = sessionPool.get(userId);
+    public void sendOneMessage(String sender, String content, String targetId) {
+        Session session = sessionPool.get(targetId);
         if (session != null && session.isOpen()) {
             try {
-                System.out.println("【WebSocket】单点消息：" + message);
+                System.out.println("【WebSocket】单点消息：" + content);
+                String message = objectMapper.writeValueAsString(ReceivedMessage.builder()
+                        .sender(sender)
+                        .content(content)
+                        .build());
                 session.getAsyncRemote().sendText(message);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            // The message recipient is not online
+
         }
     }
 
