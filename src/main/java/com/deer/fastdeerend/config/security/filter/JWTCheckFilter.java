@@ -52,21 +52,22 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             doFilter(request, response, filterChain);
             return;
         }
-        
+
         /*
-        *  下方添加无需登录授权的请求，示例
-        *  if ("/example".equals(request.getRequestURL())) {
-        *   doFilter(request, response, filterChain);
-        *   return;
-        *  }
-        * */
+         *  下方添加无需登录授权的请求，示例
+         *  if ("/example".equals(request.getRequestURL())) {
+         *   doFilter(request, response, filterChain);
+         *   return;
+         *  }
+         * */
 
         if ("/post/selectPostPage".equals(request.getRequestURI()) ||
-        "/comment/selectAllCommentByPostId".equals(request.getRequestURI())) {
+                "/comment/selectAllCommentByPostId".equals(request.getRequestURI())) {
             doFilter(request, response, filterChain);
             return;
         }
 
+        // The Code during testing, deleted before going live
         if (request.getRequestURI().startsWith("/ws")) {
             doFilter(request, response, filterChain);
             return;

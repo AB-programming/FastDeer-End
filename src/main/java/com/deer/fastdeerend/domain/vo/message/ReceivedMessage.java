@@ -1,4 +1,4 @@
-package com.deer.fastdeerend.domain.vo;
+package com.deer.fastdeerend.domain.vo.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,14 +1,13 @@
 package com.deer.fastdeerend.socket;
 
 import com.deer.fastdeerend.domain.dto.Message;
-import com.deer.fastdeerend.domain.vo.ReceivedMessage;
+import com.deer.fastdeerend.domain.vo.message.ReceivedMessage;
+import com.deer.fastdeerend.domain.vo.message.SendStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.annotation.Resource;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -47,8 +46,9 @@ public class WebSocket {
     public void onMessage(String message) {
         System.out.println("【WebSocket】收到客户端消息:" + message);
         Message mes = this.objectMapper.readValue(message, Message.class);
-        this.sendOneMessage(this.userId, "发送成功", this.userId);
-        this.sendOneMessage(mes.getUserId(), mes.getContent(), mes.getTargetId());
+        Boolean isSend = this.sendOneMessage(mes.getUserId(), mes.getContent(), mes.getTargetId());
+        this.sendRes(this.userId, isSend ?
+                "发送成功" : "发送失败", isSend);
     }
 
     @OnError
@@ -70,22 +70,37 @@ public class WebSocket {
         }
     }
 
-    public void sendOneMessage(String sender, String content, String targetId) {
+    public Boolean sendOneMessage(String sender, String content, String targetId) {
         Session session = sessionPool.get(targetId);
         if (session != null && session.isOpen()) {
             try {
-                System.out.println("【WebSocket】单点消息：" + content);
                 String message = objectMapper.writeValueAsString(ReceivedMessage.builder()
                         .sender(sender)
                         .content(content)
                         .build());
                 session.getAsyncRemote().sendText(message);
+                System.out.println("【WebSocket】单点消息：" + message + " target=" + targetId);
+                return true;
             } catch (Exception e) {
                 e.printStackTrace();
+                return false;
             }
         } else {
             // The message recipient is not online
+            return false;
+        }
+    }
 
+    public void sendRes(String sender, String content, Boolean isSend) {
+        try {
+            String message = objectMapper.writeValueAsString(SendStatus.builder()
+                    .sender(sender)
+                    .content(content)
+                    .isSend(isSend)
+                    .build());
+            session.getAsyncRemote().sendText(message);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
