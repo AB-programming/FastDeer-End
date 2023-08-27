@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @author AB-style
  * @date 2023/07/05
  */
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserTests {
 
     @Resource
