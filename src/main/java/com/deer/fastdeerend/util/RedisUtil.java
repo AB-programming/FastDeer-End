@@ -1,11 +1,14 @@
 package com.deer.fastdeerend.util;
 
 import com.deer.fastdeerend.config.redis.RedisConfig;
+import com.deer.fastdeerend.domain.bo.MessageBo;
 import jakarta.annotation.Resource;
-import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -46,7 +49,16 @@ public class RedisUtil<T> {
         userRedisTemplate.delete(key);
     }
 
-    public void putMessageRecord(String key, T record) {
-        messageRedisTemplate.opsForList().leftPush(key, record);
+    public Boolean hasChatRecord(String key, String hashKey) {
+        return messageRedisTemplate.opsForHash().hasKey(key, hashKey);
+    }
+
+    public void putMessage(String key, String hashKey, String chatRecord) {
+        messageRedisTemplate.opsForHash().put(key, hashKey, chatRecord);
+    }
+
+    public String getChatRecord(String key, String hashKey) {
+        HashOperations<String, String, String> hashOperations = messageRedisTemplate.opsForHash();
+        return hashOperations.get(key, hashKey);
     }
 }
