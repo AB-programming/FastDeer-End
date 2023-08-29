@@ -59,14 +59,14 @@ public class JWTUtil {
                 .withClaim("userInfo", objectMapper.writeValueAsString(user))
                 .sign(Algorithm.HMAC256(secret));
 
-        redisUtil.setWithExpire(token, token, expireTime);
+        redisUtil.setTokenWithExpire(token, token, expireTime);
         return token;
     }
 
     public VerifyTokenResult verifyToken(String jwtToken) {
         VerifyTokenResult.VerifyTokenResultBuilder builder = VerifyTokenResult.builder();
         try {
-            if (!redisUtil.hasKey(jwtToken)) {
+            if (!redisUtil.hasToken(jwtToken)) {
                 builder.status(false).data("token已过期");
                 return builder.build();
             }

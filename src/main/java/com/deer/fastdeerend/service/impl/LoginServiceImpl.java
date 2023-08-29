@@ -48,6 +48,6 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Boolean isLogin(String token) {
-        return redisUtil.hasKey(token);
+        return redisUtil.hasToken(token);
     }
 }

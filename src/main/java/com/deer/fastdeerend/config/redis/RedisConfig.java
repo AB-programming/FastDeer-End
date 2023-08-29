@@ -29,27 +29,44 @@ public class RedisConfig {
     @Value("${dev.redis.port}")
     private int port;
 
-    @Value("${dev.redis.database}")
-    private int database;
-
     @Value("${dev.redis.maxTotal}")
     private int maxTotal;
 
     @Value("${dev.redis.maxIdle}")
     private int maxIdle;
 
+    @Value("${dev.redis.database.user-db}")
+    private int userDb;
+
+    @Value("${dev.redis.database.message-db}")
+    private int messageDb;
+
+    public static final String REDIS_TEMPLATE_USER = "userRedisTemplate";
+    public static final String REDIS_TEMPLATE_MESSAGE = "messageRedisTemplate";
+
+    @Bean(REDIS_TEMPLATE_USER)
+    public RedisTemplate<String, Object> userRedisTemplate() {
+        return redisTemplate(userDb);
+    }
+
+    @Bean(REDIS_TEMPLATE_MESSAGE)
+    public RedisTemplate<String, Object> messageRedisTemplate() {
+        return redisTemplate(messageDb);
+    }
+
+
     /**
-     * Redis模版配置，配置序列化类型
+     * RedisTemplate基础配置模版
      *
-     * @param factory 工厂
+     * @param database 数据库
      * @return {@link RedisTemplate}<{@link String}, {@link Object}>
      */
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+    public RedisTemplate<String, Object> redisTemplate(int database) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(factory);
+        template.setConnectionFactory(redisConnectionFactory(database));
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
+        template.afterPropertiesSet();
         return template;
     }
 
@@ -58,8 +75,7 @@ public class RedisConfig {
      *
      * @return {@link JedisConnectionFactory}
      */
-    @Bean
-    JedisConnectionFactory redisConnectionFactory() {
+    RedisConnectionFactory redisConnectionFactory(int database) {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(host, port);
 //        config.setPassword(password);
         config.setDatabase(database);
@@ -76,6 +92,8 @@ public class RedisConfig {
         JedisClientConfiguration jedisClientConfiguration = JedisClientConfiguration.builder().usePooling().poolConfig(
                 jedisPoolConfig).build();
 
-        return new JedisConnectionFactory(config, jedisClientConfiguration);
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(config, jedisClientConfiguration);
+        jedisConnectionFactory.afterPropertiesSet();
+        return jedisConnectionFactory;
     }
 }

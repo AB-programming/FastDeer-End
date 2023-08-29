@@ -1,5 +1,5 @@
 dev:
-  host: http://192.168.158.139:8080
+  host: http://192.168.185.139:8080
   mysql:
 #    address: rm-cn-nwy3aocn0000pho.rwlb.rds.aliyuncs.com
     address: localhost
@@ -11,7 +11,9 @@ dev:
 #    host: r-bp15xrn4toitsx8rgxpd.redis.rds.aliyuncs.com
     host: 127.0.0.1
     password: Fastdeer123
-    database: 0
+    database:
+      user-db: 0
+      message-db: 1
     port: 6379
     maxTotal: 30 # 最大连接数
     maxIdle: 20 # 最大空闲连接数

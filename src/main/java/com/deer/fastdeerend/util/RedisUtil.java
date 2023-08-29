@@ -1,6 +1,8 @@
 package com.deer.fastdeerend.util;
 
+import com.deer.fastdeerend.config.redis.RedisConfig;
 import jakarta.annotation.Resource;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -14,29 +16,37 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class RedisUtil<T> {
-    @Resource
-    private RedisTemplate<String, T> redisTemplate;
-    public T get(String key) {
-        return redisTemplate.opsForValue().get(key);
+    @Resource(name = RedisConfig.REDIS_TEMPLATE_USER)
+    private RedisTemplate<String, T> userRedisTemplate;
+
+    @Resource(name = RedisConfig.REDIS_TEMPLATE_MESSAGE)
+    private RedisTemplate<String, T> messageRedisTemplate;
+
+    public T getToken(String key) {
+        return userRedisTemplate.opsForValue().get(key);
     }
 
-    public void set(String key, T value) {
-        redisTemplate.opsForValue().set(key, value);
+    public void setToken(String key, T value) {
+        userRedisTemplate.opsForValue().set(key, value);
     }
 
-    public void setWithExpire(String key, T value, long time) {
-        redisTemplate.opsForValue().set(key, value);
-        redisTemplate.expire(key, time, TimeUnit.MINUTES);
+    public void setTokenWithExpire(String key, T value, long time) {
+        userRedisTemplate.opsForValue().set(key, value);
+        userRedisTemplate.expire(key, time, TimeUnit.MINUTES);
     }
-    public Boolean hasKey(String key) {
-        return redisTemplate.hasKey(key);
-    }
-
-    public Long getExpire(String key) {
-        return redisTemplate.getExpire(key);
+    public Boolean hasToken(String key) {
+        return userRedisTemplate.hasKey(key);
     }
 
-    public void drop(String key) {
-        redisTemplate.delete(key);
+    public Long getTokenExpire(String key) {
+        return userRedisTemplate.getExpire(key);
+    }
+
+    public void dropToken(String key) {
+        userRedisTemplate.delete(key);
+    }
+
+    public void putMessageRecord(String key, T record) {
+        messageRedisTemplate.opsForList().leftPush(key, record);
     }
 }

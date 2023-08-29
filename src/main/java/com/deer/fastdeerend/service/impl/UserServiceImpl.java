@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Integer deleteUserById(String id, String token) {
-        redisUtil.drop(token);
+        redisUtil.dropToken(token);
         String fileName = StringUtils.getFilename(userMapper.selectById(id).getAvatarUrl());
         FileSystemUtils.deleteRecursively(new File(uploadLocation + fileName));
         return userMapper.deleteById(id);

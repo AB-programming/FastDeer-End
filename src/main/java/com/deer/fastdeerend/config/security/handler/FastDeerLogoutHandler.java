@@ -56,7 +56,7 @@ public class FastDeerLogoutHandler implements LogoutHandler {
             return;
         }
 
-        redisUtil.drop(token);
+        redisUtil.dropToken(token);
 
         SecurityContextHolder.getContext().setAuthentication(null);
         HttpResponse<String> res = builder.code(HttpResponseStatusCodeSet.OK.getValue())
