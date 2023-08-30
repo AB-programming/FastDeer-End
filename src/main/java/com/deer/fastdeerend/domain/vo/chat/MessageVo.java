@@ -13,8 +13,6 @@ public class MessageVo {
     private String senderId;
     private String senderName;
     private String senderAvatar;
-    private String receiverId;
-    private String receiverName;
-    private String receiverAvatar;
     private String content;
+    private Boolean isMe;
 }

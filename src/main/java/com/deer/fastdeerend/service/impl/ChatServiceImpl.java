@@ -88,10 +88,8 @@ public class ChatServiceImpl implements ChatService {
                 .senderId(messageBo.getSender())
                 .senderName(userMapper.selectById(messageBo.getSender()).getNickName())
                 .senderAvatar(userMapper.selectById(messageBo.getSender()).getAvatarUrl())
-                .receiverId(messageBo.getReceiver())
-                .receiverName(userMapper.selectById(messageBo.getReceiver()).getNickName())
-                .receiverAvatar(userMapper.selectById(messageBo.getReceiver()).getAvatarUrl())
                 .content(messageBo.getContent())
+                .isMe(userId.equals(messageBo.getSender()))
                 .build()).toList();
     }
 

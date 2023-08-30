@@ -25,7 +25,7 @@ public class UrlScriptTest {
     @Resource
     private PostMapper postMapper;
 
-    private final static String address = "192.168.185.139:8080";
+    private final static String address = "192.168.25.139:8080";
 
     @Test
     public void testUpdateUserUrl() {

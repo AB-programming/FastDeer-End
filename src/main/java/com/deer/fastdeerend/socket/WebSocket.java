@@ -1,8 +1,9 @@
 package com.deer.fastdeerend.socket;
 
+import com.deer.fastdeerend.dao.user.UserMapper;
+import com.deer.fastdeerend.domain.vo.chat.MessageVo;
 import com.deer.fastdeerend.util.SpringUtil;
 import com.deer.fastdeerend.domain.dto.Message;
-import com.deer.fastdeerend.domain.vo.chat.ReceivedMessage;
 import com.deer.fastdeerend.domain.vo.chat.SendStatus;
 import com.deer.fastdeerend.service.ChatService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
+
 @Component
 @Scope("prototype")
 @ServerEndpoint("/ws/{userId}")
@@ -24,6 +26,8 @@ public class WebSocket {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private ChatService chatService = SpringUtil.getBean(ChatService.class);
+
+    private UserMapper userMapper = SpringUtil.getBean(UserMapper.class);
 
     private Session session;
     private String userId;
@@ -54,8 +58,9 @@ public class WebSocket {
         System.out.println("【WebSocket】收到客户端消息:" + message);
         Message mes = this.objectMapper.readValue(message, Message.class);
         Boolean isSend = this.sendOneMessage(mes.getUserId(), mes.getContent(), mes.getTargetId());
-        this.sendRes(this.userId, isSend ?
-                "发送成功" : "发送失败", isSend);
+        if (isSend) {
+            this.sendOneMessage(mes.getUserId(), mes.getContent(), mes.getUserId());
+        }
     }
 
     @OnError
@@ -82,9 +87,12 @@ public class WebSocket {
         Session session = sessionPool.get(targetId);
         if (session != null && session.isOpen()) {
             try {
-                String message = objectMapper.writeValueAsString(ReceivedMessage.builder()
-                        .sender(sender)
+                String message = objectMapper.writeValueAsString(MessageVo.builder()
+                        .senderId(sender)
+                        .senderName(userMapper.selectById(sender).getNickName())
+                        .senderAvatar(userMapper.selectById(sender).getAvatarUrl())
                         .content(content)
+                        .isMe(sender.equals(targetId))
                         .build());
                 session.getAsyncRemote().sendText(message);
                 chatService.sendMessage(sender, targetId, content);

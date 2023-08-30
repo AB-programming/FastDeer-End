@@ -40,7 +40,7 @@ public class MessageTests {
     @Test
     public void testAddMessage() {
         try {
-            chatService.sendMessage("3", "1", "I'm a 3");
+            chatService.sendMessage("3", "1", "33333333333");
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
