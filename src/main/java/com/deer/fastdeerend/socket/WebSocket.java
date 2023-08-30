@@ -1,22 +1,29 @@
 package com.deer.fastdeerend.socket;
 
+import com.deer.fastdeerend.util.SpringUtil;
 import com.deer.fastdeerend.domain.dto.Message;
-import com.deer.fastdeerend.domain.vo.message.ReceivedMessage;
-import com.deer.fastdeerend.domain.vo.message.SendStatus;
+import com.deer.fastdeerend.domain.vo.chat.ReceivedMessage;
+import com.deer.fastdeerend.domain.vo.chat.SendStatus;
+import com.deer.fastdeerend.service.ChatService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import lombok.SneakyThrows;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
-
 @Component
+@Scope("prototype")
 @ServerEndpoint("/ws/{userId}")
 public class WebSocket {
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    private ChatService chatService = SpringUtil.getBean(ChatService.class);
 
     private Session session;
     private String userId;
@@ -70,6 +77,7 @@ public class WebSocket {
         }
     }
 
+    @Transactional
     public Boolean sendOneMessage(String sender, String content, String targetId) {
         Session session = sessionPool.get(targetId);
         if (session != null && session.isOpen()) {
@@ -79,15 +87,23 @@ public class WebSocket {
                         .content(content)
                         .build());
                 session.getAsyncRemote().sendText(message);
-                System.out.println("【WebSocket】单点消息：" + message + " target=" + targetId);
+                chatService.sendMessage(sender, targetId, content);
+                System.out.println("【WebSocket】单点消息(在线)：" + message + " target=" + targetId);
                 return true;
-            } catch (Exception e) {
+            } catch (JsonProcessingException e) {
                 e.printStackTrace();
                 return false;
             }
         } else {
             // The message recipient is not online
-            return false;
+            try {
+                chatService.sendMessage(sender, targetId, content);
+                System.out.println("【WebSocket】单点消息(离线)：" + content + " target=" + targetId);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+                return false;
+            }
+            return true;
         }
     }
 
