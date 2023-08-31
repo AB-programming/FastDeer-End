@@ -14,6 +14,8 @@ public interface ChatService {
      public List<MessageVo> getChatRecord(String userId, String targetId) throws JsonProcessingException;
 
      public void readMessage(String userId, String targetId) throws JsonProcessingException;
+
+     public void deleteChat(String userId, String targetId);
 }
 
 

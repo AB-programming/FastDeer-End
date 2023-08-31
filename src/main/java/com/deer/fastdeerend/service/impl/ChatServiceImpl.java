@@ -100,4 +100,9 @@ public class ChatServiceImpl implements ChatService {
         chatRecordBo.setUnreadCount(0);
         redisUtil.putMessage(userId, targetId, objectMapper.writeValueAsString(chatRecordBo));
     }
+
+    @Override
+    public void deleteChat(String userId, String targetId) {
+        redisUtil.dropChat(userId, targetId);
+    }
 }

@@ -64,4 +64,8 @@ public class RedisUtil<T> {
         HashOperations<String, String, String> hashOperations = messageRedisTemplate.opsForHash();
         return hashOperations.entries(key);
     }
+
+    public void dropChat(String key, String hashKey) {
+        messageRedisTemplate.opsForHash().delete(key, hashKey);
+    }
 }

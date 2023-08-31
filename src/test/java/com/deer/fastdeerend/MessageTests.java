@@ -66,4 +66,9 @@ public class MessageTests {
             System.out.println(chat);
         }
     }
+
+    @Test
+    public void testDeleteChat() {
+        chatService.deleteChat("1", "5");
+    }
 }

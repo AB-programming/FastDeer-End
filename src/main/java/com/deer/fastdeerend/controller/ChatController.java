@@ -2,16 +2,14 @@ package com.deer.fastdeerend.controller;
 
 import com.deer.fastdeerend.common.HttpResponse;
 import com.deer.fastdeerend.common.HttpResponseStatusCodeSet;
+import com.deer.fastdeerend.domain.dto.Message;
 import com.deer.fastdeerend.domain.vo.chat.ChatVo;
 import com.deer.fastdeerend.domain.vo.chat.MessageVo;
 import com.deer.fastdeerend.service.ChatService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.annotation.Resource;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -69,22 +67,22 @@ public class ChatController {
     }
 
     @PostMapping("/readMessage")
-    public HttpResponse<Boolean> readMessage(String userId, String targetId) {
+    public HttpResponse<Boolean> readMessage(@RequestBody  Message message) {
         HttpResponse.HttpResponseBuilder<Boolean> builder = HttpResponse.builder();
-        if (!StringUtils.hasText(userId)) {
+        if (!StringUtils.hasText(message.getUserId())) {
             return builder
                     .code(HttpResponseStatusCodeSet.BadRequest.getValue())
                     .msg("缺少userId参数")
                     .build();
         }
-        if (!StringUtils.hasText(targetId)) {
+        if (!StringUtils.hasText(message.getTargetId())) {
             return builder
                     .code(HttpResponseStatusCodeSet.BadRequest.getValue())
                     .msg("缺少targetId参数")
                     .build();
         }
         try {
-            chatService.readMessage(userId, targetId);
+            chatService.readMessage(message.getUserId(), message.getTargetId());
             return builder
                     .code(HttpResponseStatusCodeSet.OK.getValue())
                     .msg("读取成功")
@@ -98,5 +96,27 @@ public class ChatController {
                     .data(false)
                     .build();
         }
+    }
+
+    @DeleteMapping("/deleteChat")
+    public HttpResponse<Boolean> deleteChat(@RequestBody Message message) {
+        HttpResponse.HttpResponseBuilder<Boolean> builder = HttpResponse.builder();
+        if (!StringUtils.hasText(message.getUserId())) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少userId参数")
+                    .build();
+        }
+        if (!StringUtils.hasText(message.getTargetId())) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少targetId参数")
+                    .build();
+        }
+        chatService.deleteChat(message.getUserId(), message.getTargetId());
+        return builder
+                .code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("删除成功")
+                .build();
     }
 }

@@ -4,7 +4,6 @@ import com.deer.fastdeerend.dao.user.UserMapper;
 import com.deer.fastdeerend.domain.vo.chat.MessageVo;
 import com.deer.fastdeerend.util.SpringUtil;
 import com.deer.fastdeerend.domain.dto.Message;
-import com.deer.fastdeerend.domain.vo.chat.SendStatus;
 import com.deer.fastdeerend.service.ChatService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,7 +58,7 @@ public class WebSocket {
         Message mes = this.objectMapper.readValue(message, Message.class);
         Boolean isSend = this.sendOneMessage(mes.getUserId(), mes.getContent(), mes.getTargetId());
         if (isSend) {
-            this.sendOneMessage(mes.getUserId(), mes.getContent(), mes.getUserId());
+            this.sendRes(mes.getUserId(), mes.getContent());
         }
     }
 
@@ -67,19 +66,6 @@ public class WebSocket {
     public void onError(Session session, Throwable error) {
         System.out.println("用户错误,原因:" + error.getMessage());
         error.printStackTrace();
-    }
-
-    public void sendAllMessage(String message) {
-        System.out.println("【WebSocket】广播消息:" + message);
-        for (WebSocket webSocket : webSockets) {
-            try {
-                if (webSocket.session.isOpen()) {
-                    webSocket.session.getAsyncRemote().sendText(message);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     @Transactional
@@ -115,16 +101,21 @@ public class WebSocket {
         }
     }
 
-    public void sendRes(String sender, String content, Boolean isSend) {
-        try {
-            String message = objectMapper.writeValueAsString(SendStatus.builder()
-                    .sender(sender)
-                    .content(content)
-                    .isSend(isSend)
-                    .build());
-            session.getAsyncRemote().sendText(message);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void sendRes(String sender, String content) {
+        Session session = sessionPool.get(sender);
+        if (session != null && session.isOpen()) {
+            try {
+                String message = objectMapper.writeValueAsString(MessageVo.builder()
+                        .senderId(sender)
+                        .senderName(userMapper.selectById(sender).getNickName())
+                        .senderAvatar(userMapper.selectById(sender).getAvatarUrl())
+                        .content(content)
+                        .isMe(true)
+                        .build());
+                session.getAsyncRemote().sendText(message);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
         }
     }
 
