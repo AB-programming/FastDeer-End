@@ -1,14 +1,21 @@
 package com.deer.fastdeerend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.deer.fastdeerend.dao.post.PostLikeMapper;
+import com.deer.fastdeerend.dao.post.PostMapper;
 import com.deer.fastdeerend.dao.user.UserMapper;
 import com.deer.fastdeerend.dao.user.UserRelateMapper;
 import com.deer.fastdeerend.domain.bo.AvatarBo;
+import com.deer.fastdeerend.domain.entity.post.Post;
+import com.deer.fastdeerend.domain.entity.post.PostLike;
 import com.deer.fastdeerend.domain.entity.user.User;
 import com.deer.fastdeerend.domain.entity.user.UserRelate;
+import com.deer.fastdeerend.domain.vo.post.userinfo.UserInfo;
+import com.deer.fastdeerend.domain.vo.post.userinfo.base.BaseInfo;
+import com.deer.fastdeerend.domain.vo.post.userinfo.school.SchoolInfo;
+import com.deer.fastdeerend.domain.vo.post.userinfo.social.SocialInfo;
 import com.deer.fastdeerend.service.UserService;
 import com.deer.fastdeerend.util.RedisUtil;
-import com.google.protobuf.compiler.PluginProtos;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,8 +26,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * 用户模块业务层处理
@@ -45,6 +54,12 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserRelateMapper userRelateMapper;
+
+    @Resource
+    private PostMapper postMapper;
+
+    @Resource
+    private PostLikeMapper postLikeMapper;
 
     /**
      * 通过id更新用户信息
@@ -151,5 +166,53 @@ public class UserServiceImpl implements UserService {
     public Long selectUserRelateCountByUserId(String userId) {
         return userRelateMapper.selectCount(new QueryWrapper<UserRelate>()
                 .eq("user_id", userId));
+    }
+
+    @Override
+    public UserInfo getUserInfoByUserId(String userId) {
+        User user = userMapper.selectById(userId);
+        Long fans = userRelateMapper.selectCount(new QueryWrapper<UserRelate>()
+                .eq("target", userId));
+        Long following = userRelateMapper.selectCount(new QueryWrapper<UserRelate>()
+                .eq("user_id", userId));
+        List<Post> userPosts = postMapper.selectList(new QueryWrapper<Post>()
+                .eq("user_id", user.getId()));
+        AtomicReference<Long> likes = new AtomicReference<>(0L);
+        userPosts.forEach(userPost -> {
+            likes.updateAndGet(v -> v + postLikeMapper.selectCount(new QueryWrapper<PostLike>()
+                    .eq("post_id", userPost.getPostId())));
+        });
+
+        return UserInfo.builder()
+                .userId(userId)
+                .name(user.getNickName())
+                .avatar(user.getAvatarUrl())
+                .role(user.getRole())
+                .socialInfo(SocialInfo.builder()
+                        .likes(likes.get())
+                        .fans(fans)
+                        .following(following)
+                        .build())
+                .baseInfo(BaseInfo.builder()
+                        .gender(user.getGender())
+                        .address(user.getPlace())
+                        .build())
+                .schoolInfo(SchoolInfo.builder()
+                        .schoolName(user.getSchool())
+                        .major(user.getMajor())
+                        .degree(user.getQualification())
+                        .graduation(user.getGraduationDate())
+                        .build())
+                .build();
+    }
+
+    @Override
+    public List<User> selectUserByKeyword(String keyword) {
+        List<User> res = new ArrayList<>();
+        if (userMapper.exists(new QueryWrapper<User>().eq("id", keyword))) {
+            res.add(userMapper.selectById(keyword));
+        }
+        res.addAll(userMapper.selectList(new QueryWrapper<User>().like("nick_name", keyword)));
+        return res;
     }
 }

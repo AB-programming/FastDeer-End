@@ -6,6 +6,7 @@ import com.deer.fastdeerend.domain.bo.AvatarBo;
 import com.deer.fastdeerend.domain.dto.user.UserRelateRequest;
 import com.deer.fastdeerend.domain.dto.user.UserRequest;
 import com.deer.fastdeerend.domain.entity.user.User;
+import com.deer.fastdeerend.domain.vo.post.userinfo.UserInfo;
 import com.deer.fastdeerend.service.UserService;
 import com.deer.fastdeerend.util.JWTUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,6 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -207,6 +210,41 @@ public class UserController {
                 .code(HttpResponseStatusCodeSet.OK.getValue())
                 .msg("查询成功")
                 .data(userService.selectUserRelateCountByUserId(userId))
+                .build();
+    }
+
+    @GetMapping("/getUserInfoByUserId")
+    public HttpResponse<UserInfo> getUserInfoByUserId(String userId) {
+        HttpResponse.HttpResponseBuilder<UserInfo> builder = HttpResponse.builder();
+
+        if (!StringUtils.hasText(userId)) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少userId参数")
+                    .build();
+        }
+
+        return builder
+                .code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("查询成功")
+                .data(userService.getUserInfoByUserId(userId))
+                .build();
+    }
+
+    @GetMapping("/selectUserByKeyword")
+    public HttpResponse<List<User>> selectUserByKeyword(String keyword) {
+        HttpResponse.HttpResponseBuilder<List<User>> builder = HttpResponse.builder();
+
+        if (!StringUtils.hasText(keyword)) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少keyword参数")
+                    .build();
+        }
+        return builder
+                .code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("查询成功")
+                .data(userService.selectUserByKeyword(keyword))
                 .build();
     }
 }
