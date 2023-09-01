@@ -1,5 +1,5 @@
 dev:
-  host: http://192.168.247.139:8080
+  host: http://192.168.190.139:8080
   mysql:
 #    address: rm-cn-nwy3aocn0000pho.rwlb.rds.aliyuncs.com
     address: localhost

@@ -58,7 +58,7 @@ public class WebSocket {
         Message mes = this.objectMapper.readValue(message, Message.class);
         Boolean isSend = this.sendOneMessage(mes.getUserId(), mes.getContent(), mes.getTargetId());
         if (isSend) {
-            this.sendRes(mes.getUserId(), mes.getContent());
+            this.sendRes(mes.getUserId(), mes.getContent(), mes.getTargetId());
         }
     }
 
@@ -101,7 +101,7 @@ public class WebSocket {
         }
     }
 
-    public void sendRes(String sender, String content) {
+    public void sendRes(String sender, String content, String targetId) {
         Session session = sessionPool.get(sender);
         if (session != null && session.isOpen()) {
             try {

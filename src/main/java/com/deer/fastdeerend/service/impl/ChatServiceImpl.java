@@ -83,6 +83,9 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     public List<MessageVo> getChatRecord(String userId, String targetId) throws JsonProcessingException {
+        if (!redisUtil.hasChatRecord(userId, targetId)) {
+            return List.of();
+        }
         ChatRecordBo chatRecordBo = objectMapper.readValue(redisUtil.getChatRecord(userId, targetId), ChatRecordBo.class);
         return chatRecordBo.getChatRecordList().stream().map(messageBo -> MessageVo.builder()
                 .senderId(messageBo.getSender())
