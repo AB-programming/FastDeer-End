@@ -1,5 +1,5 @@
 dev:
-  host: http://192.168.190.139:8080
+  host: http://192.168.12.139:8080
   mysql:
 #    address: rm-cn-nwy3aocn0000pho.rwlb.rds.aliyuncs.com
     address: localhost
@@ -44,3 +44,6 @@ fastDeer:
     secret: fastDeer8888 # Spring Security 密钥
     expireTime: 120 # token过期时间， 单位-分钟
     issuer: fast-deer # JWT签发者
+  admin:
+    username: user
+    password: 123
