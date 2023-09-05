@@ -1,6 +1,6 @@
 package com.deer.fastdeerend.service.impl;
 
-import com.deer.fastdeerend.config.redis.RedisConfig;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.deer.fastdeerend.dao.user.UserMapper;
 import com.deer.fastdeerend.domain.entity.user.User;
 import com.deer.fastdeerend.service.AdminService;
@@ -11,6 +11,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -26,6 +28,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Resource
     private RedisUtil<String> redisUtil;
+
+    @Resource
+    private UserMapper userMapper;
 
     @Override
     public VerifyTokenResult login(String username, String password) throws JsonProcessingException {
@@ -49,5 +54,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Boolean isLogin(String token) {
         return redisUtil.hasToken(token);
+    }
+
+    @Override
+    public List<User> selectAllUser() {
+        return userMapper.selectList(new QueryWrapper<User>().ne("role", "ROLE_admin"));
     }
 }

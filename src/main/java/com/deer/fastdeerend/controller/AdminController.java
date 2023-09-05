@@ -3,13 +3,17 @@ package com.deer.fastdeerend.controller;
 import com.deer.fastdeerend.common.HttpResponse;
 import com.deer.fastdeerend.common.HttpResponseStatusCodeSet;
 import com.deer.fastdeerend.domain.dto.admin.AdminRequest;
+import com.deer.fastdeerend.domain.entity.user.User;
 import com.deer.fastdeerend.service.AdminService;
 import com.deer.fastdeerend.util.model.VerifyTokenResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -56,5 +60,14 @@ public class AdminController {
         return builder.code(HttpResponseStatusCodeSet.OK.getValue())
                 .msg(adminService.isLogin(token) ? "已登录" : "未登录")
                 .data(adminService.isLogin(token)).build();
+    }
+
+    @GetMapping("/selectAllUser")
+    @PreAuthorize("hasAuthority('ROLE_admin')")
+    public HttpResponse<List<User>> selectAllUser() {
+        HttpResponse.HttpResponseBuilder<List<User>> builder = HttpResponse.builder();
+        return builder.code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("查询成功")
+                .data(adminService.selectAllUser()).build();
     }
 }
