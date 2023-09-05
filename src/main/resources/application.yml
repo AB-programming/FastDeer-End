@@ -1,12 +1,12 @@
 dev:
-  host: http://192.168.12.139:8080
+  host: http://192.168.153.191:8080
   mysql:
 #    address: rm-cn-nwy3aocn0000pho.rwlb.rds.aliyuncs.com
     address: localhost
 #    username: abstyle
     username: root
 #    password: Fastdeer123
-    password: 12345678
+    password: 0808
   redis:
 #    host: r-bp15xrn4toitsx8rgxpd.redis.rds.aliyuncs.com
     host: 127.0.0.1
@@ -18,13 +18,16 @@ dev:
     maxTotal: 30 # 最大连接数
     maxIdle: 20 # 最大空闲连接数
 
+#  staticUrl: file:/usr/local/lib/fastdeer-end/src/main/resources/static/
   staticUrl: file:/Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/
   maxFileSize: 200
   maxRequestSize: 400
   avatarUpload:
+#    uploadLocation: /usr/local/lib/fastdeer-end/src/main/resources/static/avatar/
     uploadLocation: /Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/avatar/
     avatarUrl: ${dev.host}/static/avatar/
   postUpload:
+#    uploadLocation: /usr/local/lib/fastdeer-end/src/main/resources/static/post/
     uploadLocation: /Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/post/
     postUrl: ${dev.host}/static/post/
 
