@@ -3,6 +3,7 @@ package com.deer.fastdeerend.controller;
 import com.deer.fastdeerend.common.HttpResponse;
 import com.deer.fastdeerend.common.HttpResponseStatusCodeSet;
 import com.deer.fastdeerend.domain.dto.admin.AdminRequest;
+import com.deer.fastdeerend.domain.dto.user.UserRequest;
 import com.deer.fastdeerend.domain.entity.user.User;
 import com.deer.fastdeerend.service.AdminService;
 import com.deer.fastdeerend.util.model.VerifyTokenResult;
@@ -69,5 +70,30 @@ public class AdminController {
         return builder.code(HttpResponseStatusCodeSet.OK.getValue())
                 .msg("查询成功")
                 .data(adminService.selectAllUser()).build();
+    }
+
+    @DeleteMapping("/removeUserById")
+    @PreAuthorize("hasAuthority('ROLE_admin')")
+    public HttpResponse<Boolean> removeUserById(@RequestBody UserRequest userRequest) {
+        HttpResponse.HttpResponseBuilder<Boolean> builder = HttpResponse.builder();
+        if (!StringUtils.hasText(userRequest.getOpenId())) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少id参数")
+                    .build();
+        }
+        try {
+            return builder
+                    .code(HttpResponseStatusCodeSet.OK.getValue())
+                    .msg("删除成功")
+                    .data(adminService.removeUserById(userRequest.getOpenId()))
+                    .build();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return builder
+                    .code(HttpResponseStatusCodeSet.InternalServerError.getValue())
+                    .msg("服务器内部错误")
+                    .build();
+        }
     }
 }

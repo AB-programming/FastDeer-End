@@ -6,7 +6,9 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,6 +27,10 @@ public class RedisUtil<T> {
 
     public T getToken(String key) {
         return userRedisTemplate.opsForValue().get(key);
+    }
+
+    public Set<String> getAllToken() {
+        return userRedisTemplate.keys("*");
     }
 
     public void setToken(String key, T value) {

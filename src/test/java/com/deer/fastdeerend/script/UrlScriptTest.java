@@ -7,6 +7,7 @@ import com.deer.fastdeerend.domain.entity.post.Post;
 import com.deer.fastdeerend.domain.entity.user.User;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
@@ -25,10 +26,14 @@ public class UrlScriptTest {
     @Resource
     private PostMapper postMapper;
 
-    private final static String address = "192.168.12.139:8080";
+    @Value("${dev.host}")
+    private String host;
 
     @Test
     public void testUpdateUserUrl() {
+
+        String address = host.split("/")[2];
+
         List<User> users = userMapper.selectList(new QueryWrapper<>());
         for (User user : users) {
             String avatarUrl = user.getAvatarUrl();
@@ -47,6 +52,8 @@ public class UrlScriptTest {
 
     @Test
     public void testUpdatePostUrls() {
+        String address = host.split("/")[2];
+
         List<Post> posts = postMapper.selectList(new QueryWrapper<>());
         for (Post post : posts) {
             String urls = post.getUrls();

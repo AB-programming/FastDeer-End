@@ -12,4 +12,6 @@ public interface AdminService {
     public Boolean isLogin(String token);
 
     public List<User> selectAllUser();
+
+    public Boolean removeUserById(String id) throws JsonProcessingException;
 }

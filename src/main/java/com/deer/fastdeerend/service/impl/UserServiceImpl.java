@@ -97,7 +97,9 @@ public class UserServiceImpl implements UserService {
     public Integer deleteUserById(String id, String token) {
         redisUtil.dropToken(token);
         String fileName = StringUtils.getFilename(userMapper.selectById(id).getAvatarUrl());
-        FileSystemUtils.deleteRecursively(new File(uploadLocation + fileName));
+        if (!"logo.png".equals(fileName)) {
+            FileSystemUtils.deleteRecursively(new File(uploadLocation + fileName));
+        }
         return userMapper.deleteById(id);
     }
 
@@ -118,7 +120,7 @@ public class UserServiceImpl implements UserService {
 
         boolean delRes = true;
 
-        if (!"logo.jpg".equals(originFileName)) {
+        if (!"logo.png".equals(originFileName)) {
             delRes = FileSystemUtils.deleteRecursively(new File(uploadLocation + originFileName));
         }
 

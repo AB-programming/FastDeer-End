@@ -8,11 +8,17 @@ import com.deer.fastdeerend.util.JWTUtil;
 import com.deer.fastdeerend.util.RedisUtil;
 import com.deer.fastdeerend.util.model.VerifyTokenResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileSystemUtils;
+import org.springframework.util.StringUtils;
 
+import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -23,6 +29,9 @@ public class AdminServiceImpl implements AdminService {
     @Value("${fastDeer.admin.password}")
     private String password;
 
+    @Value("${dev.avatarUpload.uploadLocation}")
+    private String uploadLocation;
+
     @Resource
     private JWTUtil jwtUtil;
 
@@ -31,6 +40,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private ObjectMapper objectMapper;
 
     @Override
     public VerifyTokenResult login(String username, String password) throws JsonProcessingException {
@@ -59,5 +71,25 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<User> selectAllUser() {
         return userMapper.selectList(new QueryWrapper<User>().ne("role", "ROLE_admin"));
+    }
+
+    @Override
+    @Transactional
+    public Boolean removeUserById(String id) throws JsonProcessingException {
+        Set<String> tokens = redisUtil.getAllToken();
+        for (String token : tokens) {
+            VerifyTokenResult result = jwtUtil.verifyToken(token);
+            if (result.isStatus()) {
+                User user = objectMapper.readValue(result.getData(), User.class);
+                if (user.getId().equals(id)) {
+                    redisUtil.dropToken(token);
+                }
+            }
+        }
+        String fileName = StringUtils.getFilename(userMapper.selectById(id).getAvatarUrl());
+        if (!"logo.png".equals(fileName)) {
+            FileSystemUtils.deleteRecursively(new File(uploadLocation + fileName));
+        }
+        return userMapper.deleteById(id) > 0;
     }
 }
