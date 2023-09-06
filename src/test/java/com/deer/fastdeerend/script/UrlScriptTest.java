@@ -31,9 +31,7 @@ public class UrlScriptTest {
 
     @Test
     public void testUpdateUserUrl() {
-
         String address = host.split("/")[2];
-
         List<User> users = userMapper.selectList(new QueryWrapper<>());
         for (User user : users) {
             String avatarUrl = user.getAvatarUrl();
@@ -53,7 +51,6 @@ public class UrlScriptTest {
     @Test
     public void testUpdatePostUrls() {
         String address = host.split("/")[2];
-
         List<Post> posts = postMapper.selectList(new QueryWrapper<>());
         for (Post post : posts) {
             String urls = post.getUrls();
