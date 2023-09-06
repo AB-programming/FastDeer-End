@@ -1,5 +1,5 @@
 dev:
-  host: http://192.168.153.191:8080
+  host: http://192.168.171.1:8080
   mysql:
 #    address: rm-cn-nwy3aocn0000pho.rwlb.rds.aliyuncs.com
     address: localhost
@@ -19,16 +19,19 @@ dev:
     maxIdle: 20 # 最大空闲连接数
 
 #  staticUrl: file:/usr/local/lib/fastdeer-end/src/main/resources/static/
-  staticUrl: file:/Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/
+#  staticUrl: file:/Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/ # Mac
+  staticUrl: file:F:\FastDeer\FastDeer-End\src\main\resources\static\
   maxFileSize: 200
   maxRequestSize: 400
   avatarUpload:
 #    uploadLocation: /usr/local/lib/fastdeer-end/src/main/resources/static/avatar/
-    uploadLocation: /Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/avatar/
+#    uploadLocation: /Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/avatar/ # Mac
+    uploadLocation: F:\FastDeer\FastDeer-End\src\main\resources\static\avatar\
     avatarUrl: ${dev.host}/static/avatar/
   postUpload:
 #    uploadLocation: /usr/local/lib/fastdeer-end/src/main/resources/static/post/
-    uploadLocation: /Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/post/
+#    uploadLocation: /Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/post/ # Mac
+    uploadLocation: F:\FastDeer\FastDeer-End\src\main\resources\static\post\
     postUrl: ${dev.host}/static/post/
 
 server:
