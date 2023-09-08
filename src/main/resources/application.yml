@@ -53,3 +53,10 @@ fastDeer:
   admin:
     username: user
     password: 123
+
+# 设计安全考虑，不使用配置文件+accessKeyId和accessKeySecret，使用服务器环境变量。因此服务器需要环境变量中分别暴露：
+# export OSS_ACCESS_KEY_ID=
+# export OSS_ACCESS_KEY_SECRET=
+oss:
+  endpoint: https://oss-cn-beijing.aliyuncs.com/
+  bucketName: fast-deer
