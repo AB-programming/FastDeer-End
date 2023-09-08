@@ -265,14 +265,13 @@ public class PostServiceImpl implements PostService {
     @Override
     public Boolean deletePostByPostId(String postId) {
         String[] urls = postMapper.selectById(postId).getUrls().split(";");
-        boolean delPicRes = false;
         for (String url : urls) {
             if (StringUtils.hasText(url)) {
                 String filename = StringUtils.getFilename(url);
-                delPicRes = FileSystemUtils.deleteRecursively(new File(uploadLocation + filename));
+                FileSystemUtils.deleteRecursively(new File(uploadLocation + filename));
             }
         }
-        return postMapper.deleteById(postId) > 0 && delPicRes;
+        return postMapper.deleteById(postId) > 0;
     }
 
     @Override

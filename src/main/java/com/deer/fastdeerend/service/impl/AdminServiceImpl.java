@@ -1,6 +1,7 @@
 package com.deer.fastdeerend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.deer.fastdeerend.dao.post.PostMapper;
 import com.deer.fastdeerend.dao.user.UserMapper;
 import com.deer.fastdeerend.domain.entity.user.User;
 import com.deer.fastdeerend.service.AdminService;
@@ -43,6 +44,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Resource
     private ObjectMapper objectMapper;
+
+    @Resource
+    private PostMapper postMapper;
 
     @Override
     public VerifyTokenResult login(String username, String password) throws JsonProcessingException {
@@ -91,5 +95,10 @@ public class AdminServiceImpl implements AdminService {
             FileSystemUtils.deleteRecursively(new File(uploadLocation + fileName));
         }
         return userMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public Long getPostCount() {
+        return postMapper.selectCount(new QueryWrapper<>());
     }
 }

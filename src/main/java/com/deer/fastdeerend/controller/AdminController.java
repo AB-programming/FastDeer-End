@@ -96,4 +96,15 @@ public class AdminController {
                     .build();
         }
     }
+
+    @GetMapping("/getPostCount")
+    @PreAuthorize("hasAuthority('ROLE_admin')")
+    public HttpResponse<Long> getPostCount() {
+        HttpResponse.HttpResponseBuilder<Long> builder = HttpResponse.builder();
+        return builder
+                .code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("查询成功")
+                .data(adminService.getPostCount())
+                .build();
+    }
 }

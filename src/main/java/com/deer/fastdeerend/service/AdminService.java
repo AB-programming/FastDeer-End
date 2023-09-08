@@ -14,4 +14,6 @@ public interface AdminService {
     public List<User> selectAllUser();
 
     public Boolean removeUserById(String id) throws JsonProcessingException;
+
+    public Long getPostCount();
 }
