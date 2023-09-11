@@ -1,6 +1,7 @@
 package com.deer.fastdeerend.service;
 
 import com.aliyuncs.exceptions.ClientException;
+import com.deer.fastdeerend.domain.vo.academic.AcademicCommentVo;
 import com.deer.fastdeerend.domain.vo.academic.AcademicDisplayVo;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,4 +14,8 @@ public interface AcademicService {
     public List<AcademicDisplayVo> selectAcademicDisplayList();
 
     public String getAcademicContentByAcademicId(String academicId);
+
+    public List<AcademicCommentVo> selectAcademicCommentListByAcademicId(String academicId);
+
+    public Boolean sendAcademicComment(String userId, String academicId, String date, String content);
 }

@@ -168,3 +168,17 @@ CREATE TABLE `academic`
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+CREATE TABLE `academic_comment`
+(
+    `academic_comment_id` varchar(255) primary key,
+    `user_id`             varchar(255) not null,
+    `academic_id`         varchar(255) not null,
+    `date`                varchar(255) not null,
+    `content`             varchar(255) not null,
+    CONSTRAINT `fk_academic_comment_user` FOREIGN KEY (user_id) REFERENCES user (id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `fk_academic_comment_academic` FOREIGN KEY (academic_id) REFERENCES academic (academic_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;

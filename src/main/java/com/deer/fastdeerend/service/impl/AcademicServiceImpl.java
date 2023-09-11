@@ -2,9 +2,12 @@ package com.deer.fastdeerend.service.impl;
 
 import com.aliyuncs.exceptions.ClientException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.deer.fastdeerend.dao.academic.AcademicCommentMapper;
 import com.deer.fastdeerend.dao.academic.AcademicMapper;
 import com.deer.fastdeerend.dao.user.UserMapper;
 import com.deer.fastdeerend.domain.entity.academic.Academic;
+import com.deer.fastdeerend.domain.entity.academic.AcademicComment;
+import com.deer.fastdeerend.domain.vo.academic.AcademicCommentVo;
 import com.deer.fastdeerend.domain.vo.academic.AcademicDisplayVo;
 import com.deer.fastdeerend.service.AcademicService;
 import com.deer.fastdeerend.util.OSSUtil;
@@ -32,6 +35,9 @@ public class AcademicServiceImpl implements AcademicService {
     private AcademicMapper academicMapper;
 
     @Resource
+    private AcademicCommentMapper academicCommentMapper;
+
+    @Resource
     private UserMapper userMapper;
 
     @Override
@@ -54,7 +60,7 @@ public class AcademicServiceImpl implements AcademicService {
 
     @Override
     public List<AcademicDisplayVo> selectAcademicDisplayList() {
-        List<Academic> academics = academicMapper.selectList(new QueryWrapper<Academic>().orderByAsc("date"));
+        List<Academic> academics = academicMapper.selectList(new QueryWrapper<Academic>().orderByDesc("date"));
         return academics.parallelStream()
                 .map(academic -> AcademicDisplayVo.builder()
                         .academicId(academic.getAcademicId())
@@ -71,5 +77,34 @@ public class AcademicServiceImpl implements AcademicService {
     @Override
     public String getAcademicContentByAcademicId(String academicId) {
         return academicMapper.selectById(academicId).getContent();
+    }
+
+    @Override
+    public List<AcademicCommentVo> selectAcademicCommentListByAcademicId(String academicId) {
+        List<AcademicComment> academicComments = academicCommentMapper.selectList(new QueryWrapper<AcademicComment>()
+                .lambda()
+                .eq(AcademicComment::getAcademicId, academicId)
+                .orderByDesc(AcademicComment::getDate));
+        return academicComments.parallelStream()
+                .map(academicComment -> AcademicCommentVo.builder()
+                        .academicCommentId(academicComment.getAcademicCommentId())
+                        .userId(academicComment.getUserId())
+                        .name(userMapper.selectById(academicComment.getUserId()).getNickName())
+                        .avatar(userMapper.selectById(academicComment.getUserId()).getAvatarUrl())
+                        .date(academicComment.getDate())
+                        .content(academicComment.getContent())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Boolean sendAcademicComment(String userId, String academicId, String date, String content) {
+        return academicCommentMapper.insert(AcademicComment.builder()
+                .academicCommentId(UUID.randomUUID().toString())
+                .userId(userId)
+                .academicId(academicId)
+                .date(date)
+                .content(content)
+                .build()) > 0;
     }
 }

@@ -522,3 +522,15 @@ INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cove
 <p>生物学是研究生命的学科。通过生物学的研究，人类不断揭示生物体的奥秘，从细胞到复杂的生态系统，生物学使人类能够更好地了解生命的本质和起源。天文学是研究宇宙的学科，从星系到遥远的行星，天文学为人类揭示了宇宙的浩瀚和壮美。</p>
 
 <p>科学不断地拓展着人类的知识边界，为人类带来许多创新和进步。它不仅改变着人类对自然界和宇宙的认识，还影响着人类社会的各个方面。让我们一起投身科学的研究，共同探索未知的领域，创造美好的未来！</p>', 'https://fast-deer.oss-cn-beijing.aliyuncs.com/academic/9a989fab-9098-4c5e-8a0f-fc98809060c1.png');
+
+# academic_comment
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('1', '1', '1', '2023-09-11 11:12:03', '这是评论内容1');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('2', '2', '2', '2023-11-11 11:12:03', '这是评论内容2');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('3', '3', '3', '2022-07-11 11:12:03', '这是评论内容3');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('4', '4', '4', '2023-09-14 11:12:03', '这是评论内容4');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('5', '5', '5', '2022-12-14 11:12:03', '这是评论内容5');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('6', '6', '1', '2023-08-21 11:12:03', '这是评论内容6');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('7', '1', '2', '2021-01-29 11:12:03', '这是评论内容7');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('8', '2', '3', '2023-05-16 11:12:03', '这是评论内容8');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('9', '3', '4', '2022-07-27 11:12:03', '这是评论内容9');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('10', '4', '5', '2021-01-01 11:12:03', '这是评论内容10');

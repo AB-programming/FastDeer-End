@@ -2,11 +2,15 @@ package com.deer.fastdeerend;
 
 import com.deer.fastdeerend.dao.academic.AcademicMapper;
 import com.deer.fastdeerend.domain.entity.academic.Academic;
+import com.deer.fastdeerend.domain.vo.academic.AcademicCommentVo;
+import com.deer.fastdeerend.service.AcademicService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Slf4j
@@ -14,6 +18,9 @@ public class AcademicTests {
 
     @Resource
     private AcademicMapper academicMapper;
+
+    @Resource
+    private AcademicService academicService;
 
     @Test
     public void testAddAcademic() {
@@ -34,5 +41,11 @@ public class AcademicTests {
         String fileName= "logo.jpg";
         String filenameExtension = StringUtils.getFilenameExtension(fileName);
         log.info("filenameExtension: {}", filenameExtension);
+    }
+
+    @Test
+    public void testSelectAllAcademicCommentById() {
+        List<AcademicCommentVo> academicCommentVos = academicService.selectAcademicCommentListByAcademicId("1");
+        log.info("academicCommentVos = {}", academicCommentVos);
     }
 }
