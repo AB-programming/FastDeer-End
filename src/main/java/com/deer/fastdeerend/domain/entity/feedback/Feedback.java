@@ -1,6 +1,5 @@
-package com.deer.fastdeerend.domain.entity.academic;
+package com.deer.fastdeerend.domain.entity.feedback;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,15 +13,16 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Academic implements Serializable {
+public class Feedback implements Serializable {
     @Serial
-    private static final long serialVersionUID = 5347055075828586341L;
+    private static final long serialVersionUID = 1595545371231866164L;
+
     @TableId
-    private String academicId;
-    @TableField("user_id")
+    private String feedbackId;
     private String userId;
     private String date;
-    private String title;
+    private String tag;
+    private String rate;
     private String content;
-    private String cover;
+    private String phone;
 }

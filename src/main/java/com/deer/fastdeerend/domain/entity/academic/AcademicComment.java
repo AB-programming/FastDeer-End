@@ -7,11 +7,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AcademicComment {
+public class AcademicComment implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1034831081355717545L;
     @TableId
     private String academicCommentId;
     @TableField("user_id")

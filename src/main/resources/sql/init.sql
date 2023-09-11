@@ -156,6 +156,8 @@ CREATE TABLE `user_relate`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
+DROP TABLE IF EXISTS academic;
+
 CREATE TABLE `academic`
 (
     `academic_id` varchar(255) primary key,
@@ -169,16 +171,32 @@ CREATE TABLE `academic`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
+DROP TABLE IF EXISTS academic_comment;
+
 CREATE TABLE `academic_comment`
 (
     `academic_comment_id` varchar(255) primary key,
     `user_id`             varchar(255) not null,
     `academic_id`         varchar(255) not null,
-    `date`                varchar(255) not null,
+    `date`                char(50)     not null,
     `content`             varchar(255) not null,
     CONSTRAINT `fk_academic_comment_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_academic_comment_academic` FOREIGN KEY (academic_id) REFERENCES academic (academic_id)
         ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS feedback;
+
+CREATE TABLE `feedback`
+(
+    `feedback_id` varchar(255) primary key,
+    `user_id`     varchar(255) not null,
+    `date`        char(50)     not null,
+    `tag`         char(4)      not null,
+    `rate`        char(2)      not null,
+    `content`     varchar(255),
+    `phone`       char(20)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
