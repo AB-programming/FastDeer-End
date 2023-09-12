@@ -455,7 +455,8 @@ INSERT INTO reply_like(reply_like_id, user_id, reply_id)
 VALUES ('9', '3', '5');
 
 # academic
-INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cover) VALUES ('3a3ea601-fdf8-41f6-961c-b367c65203dc', '1', '2023-09-10 14:32:39', '"生活哲学：艺术与科学，缺一不可！"', '<p><strong>哲学：探索真理，追求智慧！</strong></p>
+INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cover)
+VALUES ('1', '1', '2023-09-10 14:32:39', '"生活哲学：艺术与科学，缺一不可！"', '<p><strong>哲学：探索真理，追求智慧！</strong></p>
 
 <p>哲学是人类对世界和生活的深入思考和探索，它旨在揭示真理和智慧，为人类提供意义和价值。从古至今，哲学一直在人类社会中占据着重要的地位。</p>
 
@@ -471,8 +472,10 @@ INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cove
 
 <p>尽管哲学提出了许多深刻的问题和挑战，但它也给予人类希望和力量。通过不断追求真理和智慧，哲学让我们认识到自己存在于一个有意义和价值的世界中。</p>
 
-<p>让我们一起走近哲学，探索真理，追求智慧，为自己的人生找到更多的意义和价值！</p>', 'https://fast-deer.oss-cn-beijing.aliyuncs.com/academic/3a3ea601-fdf8-41f6-961c-b367c65203dc.png');
-INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cover) VALUES ('4741d1f4-46b1-4e88-a090-5dbca1131e9b', '2', '2023-09-10 14:32:29', '"技术奇迹：科学也有浪漫！"', '<p><strong>技术：改变世界，创新无限！</strong></p>
+<p>让我们一起走近哲学，探索真理，追求智慧，为自己的人生找到更多的意义和价值！</p>',
+        'https://fast-deer.oss-cn-beijing.aliyuncs.com/academic/3a3ea601-fdf8-41f6-961c-b367c65203dc.png');
+INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cover)
+VALUES ('2', '2', '2023-09-10 14:32:29', '"技术奇迹：科学也有浪漫！"', '<p><strong>技术：改变世界，创新无限！</strong></p>
 
 <p>技术是推动人类社会不断进步的关键因素，它不断创新和改变着我们的生活和工作方式。从古代的简单工具到现代的高科技设备，技术一直都在不断发展演变。</p>
 
@@ -486,8 +489,10 @@ INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cove
 
 <p>技术不仅改变了我们的生活方式，还为人类带来了许多经济和社会效益。它为各行各业提供了更高效、更智能和更精准的技术支持，推动了人类社会的科技进步。</p>
 
-<p>随着科技的不断发展，我们相信未来会有更多令人惊奇的技术和创新出现，让我们一起期待！</p>', 'https://fast-deer.oss-cn-beijing.aliyuncs.com/academic/4741d1f4-46b1-4e88-a090-5dbca1131e9b.png');
-INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cover) VALUES ('48c2b0f3-ea66-4d3f-af04-9787fd79dd78', '3', '2023-09-10 14:32:12', '"幽默研究：笑是最佳的脑运动！"', '<p><strong>幽默：笑看人生，快乐无忧！</strong></p>
+<p>随着科技的不断发展，我们相信未来会有更多令人惊奇的技术和创新出现，让我们一起期待！</p>',
+        'https://fast-deer.oss-cn-beijing.aliyuncs.com/academic/4741d1f4-46b1-4e88-a090-5dbca1131e9b.png');
+INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cover)
+VALUES ('3', '3', '2023-09-10 14:32:12', '"幽默研究：笑是最佳的脑运动！"', '<p><strong>幽默：笑看人生，快乐无忧！</strong></p>
 
 <p>幽默是一种令人愉悦的力量，它让我们能够笑看人生，快乐无忧。从古至今，幽默一直被人们所喜爱，因为它能够带给我们无穷的快乐和乐趣。</p>
 
@@ -497,8 +502,10 @@ INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cove
 
 <p>幽默不仅能够带给我们快乐，还有很多积极的作用。它可以促进人们的交流和沟通，增强人际关系。在社交场合，幽默还可以化解尴尬气氛，减轻人们的压力。最重要的是，幽默可以帮助我们更好地看待人生，让我们更加乐观向上。</p>
 
-<p>总之，幽默是一种不可或缺的力量。让我们在繁忙的生活中多一些幽默感，享受轻松愉快的时光！</p>', 'https://fast-deer.oss-cn-beijing.aliyuncs.com/academic/48c2b0f3-ea66-4d3f-af04-9787fd79dd78.png');
-INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cover) VALUES ('9934f0af-73c0-41b4-9258-828b85287685', '4', '2023-09-10 14:31:37', '"艺术：大胆创意，让生活更美好！"', '<p><strong>艺术：灵魂的食粮，创造力的展现！</strong></p>
+<p>总之，幽默是一种不可或缺的力量。让我们在繁忙的生活中多一些幽默感，享受轻松愉快的时光！</p>',
+        'https://fast-deer.oss-cn-beijing.aliyuncs.com/academic/48c2b0f3-ea66-4d3f-af04-9787fd79dd78.png');
+INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cover)
+VALUES ('5', '4', '2023-09-10 14:31:37', '"艺术：大胆创意，让生活更美好！"', '<p><strong>艺术：灵魂的食粮，创造力的展现！</strong></p>
 
 <p>艺术是人类情感、想法和创造力的独特表现，它激发着我们的灵魂，并为我们的生活带来丰富的色彩。从古至今，艺术一直在人类社会中占据着举足轻重的地位。</p>
 
@@ -510,8 +517,10 @@ INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cove
 
 <p>艺术不仅给我们带来视觉和听觉的享受，还启发了我们的思维和想象力。它让我们感受到人类情感和创造力的无穷无尽，同时也让我们认识到不同文化背景下的艺术价值。无论是在博物馆、画廊、剧院还是街头，艺术都在以它独特的方式感染着我们，让我们领略到人类文明的多样性和丰富性。</p>
 
-<p>让我们一起沉浸在艺术的世界中，感受它的魅力和力量，体验它带给我们的愉悦和启迪！</p>', 'https://fast-deer.oss-cn-beijing.aliyuncs.com/academic/9934f0af-73c0-41b4-9258-828b85287685.png');
-INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cover) VALUES ('9a989fab-9098-4c5e-8a0f-fc98809060c1', '5', '2023-09-10 15:11:11', '"科学：宇宙的秘密，等待你的探索！"', '<p><strong>科学：探索未知，创造未来！</strong></p>
+<p>让我们一起沉浸在艺术的世界中，感受它的魅力和力量，体验它带给我们的愉悦和启迪！</p>',
+        'https://fast-deer.oss-cn-beijing.aliyuncs.com/academic/9934f0af-73c0-41b4-9258-828b85287685.png');
+INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cover)
+VALUES ('4', '5', '2023-09-10 15:11:11', '"科学：宇宙的秘密，等待你的探索！"', '<p><strong>科学：探索未知，创造未来！</strong></p>
 
 <p>科学是人类不断探索未知领域、创新和进步的源泉。从古至今，科学在人类社会中扮演着至关重要的角色，不断推动着人类文明的进步。</p>
 
@@ -521,16 +530,32 @@ INSERT INTO fast_deer.academic (academic_id, user_id, date, title, content, cove
 
 <p>生物学是研究生命的学科。通过生物学的研究，人类不断揭示生物体的奥秘，从细胞到复杂的生态系统，生物学使人类能够更好地了解生命的本质和起源。天文学是研究宇宙的学科，从星系到遥远的行星，天文学为人类揭示了宇宙的浩瀚和壮美。</p>
 
-<p>科学不断地拓展着人类的知识边界，为人类带来许多创新和进步。它不仅改变着人类对自然界和宇宙的认识，还影响着人类社会的各个方面。让我们一起投身科学的研究，共同探索未知的领域，创造美好的未来！</p>', 'https://fast-deer.oss-cn-beijing.aliyuncs.com/academic/9a989fab-9098-4c5e-8a0f-fc98809060c1.png');
+<p>科学不断地拓展着人类的知识边界，为人类带来许多创新和进步。它不仅改变着人类对自然界和宇宙的认识，还影响着人类社会的各个方面。让我们一起投身科学的研究，共同探索未知的领域，创造美好的未来！</p>',
+        'https://fast-deer.oss-cn-beijing.aliyuncs.com/academic/9a989fab-9098-4c5e-8a0f-fc98809060c1.png');
 
 # academic_comment
-INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('1', '1', '1', '2023-09-11 11:12:03', '这是评论内容1');
-INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('2', '2', '2', '2023-11-11 11:12:03', '这是评论内容2');
-INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('3', '3', '3', '2022-07-11 11:12:03', '这是评论内容3');
-INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('4', '4', '4', '2023-09-14 11:12:03', '这是评论内容4');
-INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('5', '5', '5', '2022-12-14 11:12:03', '这是评论内容5');
-INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('6', '6', '1', '2023-08-21 11:12:03', '这是评论内容6');
-INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('7', '1', '2', '2021-01-29 11:12:03', '这是评论内容7');
-INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('8', '2', '3', '2023-05-16 11:12:03', '这是评论内容8');
-INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('9', '3', '4', '2022-07-27 11:12:03', '这是评论内容9');
-INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content) VALUES ('10', '4', '5', '2021-01-01 11:12:03', '这是评论内容10');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content)
+VALUES ('1', '1', '1', '2023-09-11 11:12:03', '这是评论内容1');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content)
+VALUES ('2', '2', '2', '2023-11-11 11:12:03', '这是评论内容2');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content)
+VALUES ('3', '3', '3', '2022-07-11 11:12:03', '这是评论内容3');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content)
+VALUES ('4', '4', '4', '2023-09-14 11:12:03', '这是评论内容4');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content)
+VALUES ('5', '5', '5', '2022-12-14 11:12:03', '这是评论内容5');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content)
+VALUES ('6', '6', '1', '2023-08-21 11:12:03', '这是评论内容6');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content)
+VALUES ('7', '1', '2', '2021-01-29 11:12:03', '这是评论内容7');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content)
+VALUES ('8', '2', '3', '2023-05-16 11:12:03', '这是评论内容8');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content)
+VALUES ('9', '3', '4', '2022-07-27 11:12:03', '这是评论内容9');
+INSERT INTO academic_comment (academic_comment_id, user_id, academic_id, date, content)
+VALUES ('10', '4', '5', '2021-01-01 11:12:03', '这是评论内容10');
+
+INSERT INTO feedback(feedback_id, user_id, date, tag, rate, content, phone)
+VALUES ('1', '1', '2021-01-01', '问题', '4', 'Here have a bug', '13888888888');
+INSERT INTO feedback(feedback_id, user_id, date, tag, rate, content, phone)
+VALUES ('1', '1', '2021-01-01', '建议', '4', 'Very good', '13888888888');
