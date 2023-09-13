@@ -8,7 +8,6 @@ import com.deer.fastdeerend.domain.vo.academic.AcademicCommentVo;
 import com.deer.fastdeerend.domain.vo.academic.AcademicDisplayVo;
 import com.deer.fastdeerend.service.AcademicService;
 import jakarta.annotation.Resource;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

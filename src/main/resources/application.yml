@@ -25,8 +25,8 @@ dev:
   maxRequestSize: 400
   avatarUpload:
 #    uploadLocation: /usr/local/lib/fastdeer-end/src/main/resources/static/avatar/
-#    uploadLocation: /Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/avatar/ # Mac
-    uploadLocation: F:\FastDeer\FastDeer-End\src\main\resources\static\avatar\
+    uploadLocation: /Users/wang/Documents/Idea_project/fastdeer-end/src/main/resources/static/avatar/ # Mac
+#    uploadLocation: F:\FastDeer\FastDeer-End\src\main\resources\static\avatar\
     avatarUrl: ${dev.host}/static/avatar/
   postUpload:
 #    uploadLocation: /usr/local/lib/fastdeer-end/src/main/resources/static/post/ #Linux
@@ -58,5 +58,5 @@ fastDeer:
 # export OSS_ACCESS_KEY_ID=
 # export OSS_ACCESS_KEY_SECRET=
 oss:
-  endpoint: https://oss-cn-beijing.aliyuncs.com/
   bucketName: fast-deer
+  ossAddress: https://oss-cn-beijing.aliyuncs.com/
