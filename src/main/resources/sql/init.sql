@@ -200,3 +200,18 @@ CREATE TABLE `feedback`
     `phone`       char(20)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS resource;
+
+CREATE TABLE `resource` (
+    `resource_id` varchar(255) primary key,
+    `user_id` varchar(255) not null,
+    `date` char(50) not null,
+    `description` varchar(255),
+    `url` varchar(255) not null,
+    `file_name` char(100) not null,
+    `extension` char(10) not null,
+    CONSTRAINT `fk_resource_user` FOREIGN KEY (user_id) REFERENCES user (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+ DEFAULT CHARSET = utf8;
