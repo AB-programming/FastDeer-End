@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class OSSConfig {
-    @Value("${oss.ossAddress}")
+    @Value("${oss.endpoint}")
     private String endpoint;
 
     @Value("${oss.bucketName}")

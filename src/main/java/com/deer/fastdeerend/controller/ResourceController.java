@@ -45,6 +45,12 @@ public class ResourceController {
                     .msg("缺少description参数")
                     .build();
         }
+        if (null == file) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少file文件")
+                    .build();
+        }
         try {
             return builder
                     .code(HttpResponseStatusCodeSet.OK.getValue())
