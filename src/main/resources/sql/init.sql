@@ -1,5 +1,5 @@
 use
-fast_deer;
+    fast_deer;
 
 DROP TABLE IF EXISTS user;
 
@@ -26,19 +26,19 @@ DROP TABLE IF EXISTS post;
 
 CREATE TABLE `post`
 (
-    `post_id` varchar(255) primary key,
-    `date`    char(50)     not null,
-    `urls`    varchar(255),
+    `post_id`       varchar(255) primary key,
+    `date`          char(50)     not null,
+    `urls`          varchar(255),
     #         Pictures of post content,
-    not       required
+    not required
         `text` varchar (255),
     #         Post content
-        `title` varchar (255) not null,
+    `title`         varchar(255) not null,
     #         Post title
-        `browser_count` bigint DEFAULT 0,
-    `user_id` varchar(255) not null,
+    `browser_count` bigint DEFAULT 0,
+    `user_id`       varchar(255) not null,
     # foreign key for user table
-        CONSTRAINT `fk_post_user` FOREIGN KEY (user_id) REFERENCES user (id)
+    CONSTRAINT `fk_post_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE on UPDATE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -52,7 +52,7 @@ CREATE TABLE `comment`
     `content_text` varchar(255) not null,
     `user_id`      varchar(255) not null,
     #              commenter
-        `post_id` varchar (255) not null,
+    `post_id`      varchar(255) not null,
     CONSTRAINT `fk_comment_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_comment_post` FOREIGN KEY (post_id) REFERENCES post (post_id)
@@ -65,14 +65,14 @@ DROP TABLE IF EXISTS reply;
 CREATE TABLE `reply`
 (
     `reply_id`     varchar(255) primary key,
-    `date`         char(50)     not null,
-    `content_text` varchar(255) not null,
+    `date`         char(50)                  not null,
+    `content_text` varchar(255)              not null,
     `comment_id`   varchar(255),
     #              Redundant exchange performance
-        `target_id` varchar (255),
+    `target_id`    varchar(255),
     `user_id`      varchar(255),
     #              replier
-        `reply_type` enum ('COMMENT', 'REPLY') not null,
+    `reply_type`   enum ('COMMENT', 'REPLY') not null,
     CONSTRAINT `fk_reply_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
@@ -85,9 +85,9 @@ CREATE TABLE `post_like`
     `post_like_id` varchar(255) primary key,
     `user_id`      varchar(255) not null,
     #              Liker
-        `post_id` varchar (255) not null,
+    `post_id`      varchar(255) not null,
     #              Liked post
-        CONSTRAINT `fk_post_like_user` FOREIGN KEY (user_id) REFERENCES user (id)
+    CONSTRAINT `fk_post_like_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_post_like_comment` FOREIGN KEY (post_id) REFERENCES post (post_id)
         ON DELETE CASCADE ON UPDATE CASCADE
@@ -101,9 +101,9 @@ CREATE TABLE `post_bookmark`
     `post_bookmark_id` varchar(255) primary key,
     `user_id`          varchar(255) not null,
     #                  BookMarker
-        `post_id` varchar (255) not null,
+    `post_id`          varchar(255) not null,
     #                  BookMarked post
-        CONSTRAINT `fk_post_bookmark_user` FOREIGN KEY (user_id) REFERENCES user (id)
+    CONSTRAINT `fk_post_bookmark_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_post_bookmark_` FOREIGN KEY (post_id) REFERENCES post (post_id)
         ON DELETE CASCADE ON UPDATE CASCADE
@@ -117,9 +117,9 @@ CREATE TABLE `comment_like`
     `comment_like_id` varchar(255) primary key,
     `user_id`         varchar(255) not null,
     #                 Liker
-        `comment_id` varchar (255) not null,
+    `comment_id`      varchar(255) not null,
     #                 Liked comment
-        CONSTRAINT `fk_comment_like_user` FOREIGN KEY (user_id) REFERENCES user (id)
+    CONSTRAINT `fk_comment_like_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_comment_like_comment` FOREIGN KEY (comment_id) REFERENCES comment (comment_id)
         ON DELETE CASCADE ON UPDATE CASCADE
@@ -133,9 +133,9 @@ CREATE TABLE `reply_like`
     `reply_like_id` varchar(255) primary key,
     `user_id`       varchar(255) not null,
     #               Liker
-        `reply_id` varchar (255) not null,
+    `reply_id`      varchar(255) not null,
     #               Liked reply
-        CONSTRAINT `fk_reply_like_user` FOREIGN KEY (user_id) REFERENCES user (id)
+    CONSTRAINT `fk_reply_like_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_reply_like_comment` FOREIGN KEY (reply_id) REFERENCES reply (reply_id)
         ON DELETE CASCADE ON UPDATE CASCADE
@@ -203,15 +203,43 @@ CREATE TABLE `feedback`
 
 DROP TABLE IF EXISTS resource;
 
-CREATE TABLE `resource` (
+CREATE TABLE `resource`
+(
     `resource_id` varchar(255) primary key,
-    `user_id` varchar(255) not null,
-    `date` char(50) not null,
+    `user_id`     varchar(255) not null,
+    `date`        char(50)     not null,
     `description` varchar(255),
-    `url` varchar(255) not null,
-    `file_name` char(100) not null,
-    `extension` char(10) not null,
+    `url`         varchar(255) not null,
+    `file_name`   char(100)    not null,
+    `extension`   char(10)     not null,
     CONSTRAINT `fk_resource_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
- DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS school;
+
+CREATE TABLE `school`
+(
+    `school_id` varchar(255) primary key,
+    `user_id`   varchar(255) not null,
+    `password`  varchar(255) not null,
+    CONSTRAINT `fk_school_user` FOREIGN KEY (user_id) REFERENCES user (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS event;
+
+CREATE TABLE `event`
+(
+    `event_id` varchar(255) primary key,
+    `user_id`  varchar(255) not null,
+    `date`     char(50)     not null,
+    `title`    varchar(255) not null,
+    `url`      varchar(255) not null,
+    `cover`    varchar(255) not null,
+    CONSTRAINT `fk_event_user` FOREIGN KEY (user_id) REFERENCES user (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;

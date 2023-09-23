@@ -14,11 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CommentVo implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 2549834400968065158L;
-
+public class CommentVo {
     private String commentId;
     private String name;
     private String date;
