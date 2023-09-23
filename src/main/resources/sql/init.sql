@@ -29,15 +29,10 @@ CREATE TABLE `post`
     `post_id`       varchar(255) primary key,
     `date`          char(50)     not null,
     `urls`          varchar(255),
-    #         Pictures of post content,
-    not required
-        `text` varchar (255),
-    #         Post content
+    `text`          varchar(255),
     `title`         varchar(255) not null,
-    #         Post title
     `browser_count` bigint DEFAULT 0,
     `user_id`       varchar(255) not null,
-    # foreign key for user table
     CONSTRAINT `fk_post_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE on UPDATE CASCADE
 ) ENGINE = InnoDB
@@ -51,7 +46,6 @@ CREATE TABLE `comment`
     `date`         char(50)     not null,
     `content_text` varchar(255) not null,
     `user_id`      varchar(255) not null,
-    #              commenter
     `post_id`      varchar(255) not null,
     CONSTRAINT `fk_comment_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE,
@@ -68,10 +62,8 @@ CREATE TABLE `reply`
     `date`         char(50)                  not null,
     `content_text` varchar(255)              not null,
     `comment_id`   varchar(255),
-    #              Redundant exchange performance
     `target_id`    varchar(255),
     `user_id`      varchar(255),
-    #              replier
     `reply_type`   enum ('COMMENT', 'REPLY') not null,
     CONSTRAINT `fk_reply_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE
@@ -84,9 +76,7 @@ CREATE TABLE `post_like`
 (
     `post_like_id` varchar(255) primary key,
     `user_id`      varchar(255) not null,
-    #              Liker
     `post_id`      varchar(255) not null,
-    #              Liked post
     CONSTRAINT `fk_post_like_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_post_like_comment` FOREIGN KEY (post_id) REFERENCES post (post_id)
@@ -100,9 +90,7 @@ CREATE TABLE `post_bookmark`
 (
     `post_bookmark_id` varchar(255) primary key,
     `user_id`          varchar(255) not null,
-    #                  BookMarker
     `post_id`          varchar(255) not null,
-    #                  BookMarked post
     CONSTRAINT `fk_post_bookmark_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_post_bookmark_` FOREIGN KEY (post_id) REFERENCES post (post_id)
@@ -116,9 +104,7 @@ CREATE TABLE `comment_like`
 (
     `comment_like_id` varchar(255) primary key,
     `user_id`         varchar(255) not null,
-    #                 Liker
     `comment_id`      varchar(255) not null,
-    #                 Liked comment
     CONSTRAINT `fk_comment_like_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_comment_like_comment` FOREIGN KEY (comment_id) REFERENCES comment (comment_id)
@@ -132,9 +118,7 @@ CREATE TABLE `reply_like`
 (
     `reply_like_id` varchar(255) primary key,
     `user_id`       varchar(255) not null,
-    #               Liker
     `reply_id`      varchar(255) not null,
-    #               Liked reply
     CONSTRAINT `fk_reply_like_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_reply_like_comment` FOREIGN KEY (reply_id) REFERENCES reply (reply_id)
@@ -243,3 +227,22 @@ CREATE TABLE `event`
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS job;
+
+CREATE TABLE `job`
+(
+    `job_id` varchar(255) primary key,
+    `job_name` varchar(255) not null,
+    `user_id` varchar(255) not null,
+    `degree` char(50),
+    `salary` char(50),
+    `description` text,
+    `company` char(64),
+    `date` char(50) not null,
+    `deadline` char(50),
+    `contact` char(64),
+    CONSTRAINT `fk_job_user` FOREIGN KEY (user_id) REFERENCES user (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+ DEFAULT CHARSET = utf8;
