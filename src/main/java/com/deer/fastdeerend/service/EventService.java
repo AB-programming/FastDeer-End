@@ -13,4 +13,6 @@ public interface EventService {
     public List<EventVo> selectEventListByUserId(String userId);
 
     public List<EventVo> selectEventList();
+
+    public String getEventUrlByEventId(String eventId);
 }

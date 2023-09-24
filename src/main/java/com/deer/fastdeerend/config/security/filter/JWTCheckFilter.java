@@ -86,7 +86,8 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         }
 
         if ("/event/selectEventList".equals(request.getRequestURI()) ||
-                "/event/selectEventListByUserId".equals(request.getRequestURI())) {
+                "/event/selectEventListByUserId".equals(request.getRequestURI()) ||
+                "/event/getEventUrlByEventId".equals(request.getRequestURI())) {
             doFilter(request, response, filterChain);
             return;
         }

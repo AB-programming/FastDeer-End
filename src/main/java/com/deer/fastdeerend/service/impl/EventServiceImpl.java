@@ -84,4 +84,9 @@ public class EventServiceImpl implements EventService {
                         .build())
                 .toList();
     }
+
+    @Override
+    public String getEventUrlByEventId(String eventId) {
+        return eventMapper.selectById(eventId).getUrl();
+    }
 }

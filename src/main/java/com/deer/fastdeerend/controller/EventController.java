@@ -101,4 +101,20 @@ public class EventController {
                 .data(eventService.selectEventList())
                 .build();
     }
+
+    @GetMapping("/getEventUrlByEventId")
+    public HttpResponse<String> getEventUrlByEventId(String eventId) {
+        HttpResponse.HttpResponseBuilder<String> builder = HttpResponse.builder();
+        if (!StringUtils.hasText(eventId)) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少eventId参数")
+                    .build();
+        }
+        return builder
+                .code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("查询成功")
+                .data(eventService.getEventUrlByEventId(eventId))
+                .build();
+    }
 }
