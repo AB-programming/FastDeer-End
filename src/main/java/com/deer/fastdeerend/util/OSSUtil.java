@@ -2,6 +2,7 @@ package com.deer.fastdeerend.util;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.PutObjectResult;
+import com.aliyun.oss.model.VoidResult;
 import com.aliyuncs.exceptions.ClientException;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,5 +27,9 @@ public class OSSUtil {
 
     public PutObjectResult uploadFile(String directory, String fileName, byte[] bytes) throws ClientException {
         return oss.putObject(bucketName, directory + '/' + fileName, new ByteArrayInputStream(bytes));
+    }
+
+    public VoidResult deleteFile(String directory, String fileName) {
+        return oss.deleteObject(bucketName, directory + '/' + fileName);
     }
 }

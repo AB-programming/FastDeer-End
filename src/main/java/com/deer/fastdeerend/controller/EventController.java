@@ -8,10 +8,7 @@ import com.deer.fastdeerend.service.EventService;
 import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -115,6 +112,23 @@ public class EventController {
                 .code(HttpResponseStatusCodeSet.OK.getValue())
                 .msg("查询成功")
                 .data(eventService.getEventUrlByEventId(eventId))
+                .build();
+    }
+
+    @DeleteMapping("/deleteEvent")
+    @PreAuthorize("hasRole('school')")
+    public HttpResponse<Boolean> deleteEvent(@RequestParam("eventId") String eventId) {
+        HttpResponse.HttpResponseBuilder<Boolean> builder = HttpResponse.builder();
+        if (!StringUtils.hasText(eventId)) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少eventId参数")
+                    .build();
+        }
+        return builder
+                .code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("删除成功")
+                .data(eventService.deleteEvent(eventId))
                 .build();
     }
 }

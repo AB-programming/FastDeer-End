@@ -15,4 +15,6 @@ public interface EventService {
     public List<EventVo> selectEventList();
 
     public String getEventUrlByEventId(String eventId);
+
+    public Boolean deleteEvent(String eventId);
 }

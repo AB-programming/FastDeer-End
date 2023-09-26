@@ -3,13 +3,14 @@ package com.deer.fastdeerend.controller;
 import com.deer.fastdeerend.common.HttpResponse;
 import com.deer.fastdeerend.common.HttpResponseStatusCodeSet;
 import com.deer.fastdeerend.domain.dto.job.JobRequest;
+import com.deer.fastdeerend.domain.vo.job.JobVo;
 import com.deer.fastdeerend.service.JobService;
 import jakarta.annotation.Resource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/job")
@@ -18,6 +19,7 @@ public class JobController {
     private JobService jobService;
 
     @PostMapping("/publishJob")
+    @PreAuthorize("hasRole('school')")
     public HttpResponse<Boolean> publishJob(@RequestBody JobRequest jobRequest) {
         HttpResponse.HttpResponseBuilder<Boolean> builder = HttpResponse.builder();
 
@@ -53,6 +55,33 @@ public class JobController {
                         jobRequest.getDescription(), jobRequest.getCompany(),
                         jobRequest.getDate(), jobRequest.getDeadline(),
                         jobRequest.getContact()))
+                .build();
+    }
+
+    @DeleteMapping("/deleteJob")
+    @PreAuthorize("hasRole('school')")
+    public HttpResponse<Boolean> deleteJob(@RequestParam("jobId") String jobId) {
+        HttpResponse.HttpResponseBuilder<Boolean> builder = HttpResponse.builder();
+        if (!StringUtils.hasText(jobId)) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少jobId参数")
+                    .build();
+        }
+        return builder
+                .code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("删除成功")
+                .data(jobService.deleteJob(jobId))
+                .build();
+    }
+
+    @GetMapping("/selectAllJob")
+    public HttpResponse<List<JobVo>> selectAllJob() {
+        HttpResponse.HttpResponseBuilder<List<JobVo>> builder = HttpResponse.builder();
+        return builder
+                .code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("查询成功")
+                .data(jobService.selectAllJob())
                 .build();
     }
 }

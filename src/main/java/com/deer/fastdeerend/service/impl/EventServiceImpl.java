@@ -1,5 +1,6 @@
 package com.deer.fastdeerend.service.impl;
 
+import com.aliyun.oss.model.VoidResult;
 import com.aliyuncs.exceptions.ClientException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.deer.fastdeerend.dao.event.EventMapper;
@@ -88,5 +89,15 @@ public class EventServiceImpl implements EventService {
     @Override
     public String getEventUrlByEventId(String eventId) {
         return eventMapper.selectById(eventId).getUrl();
+    }
+
+    @Override
+    @Transactional
+    public Boolean deleteEvent(String eventId) {
+        ossUtil.deleteFile("event", eventId + ".html");
+        String cover = eventMapper.selectById(eventId).getCover();
+        String extension = StringUtils.getFilenameExtension(cover);
+        ossUtil.deleteFile("event/cover", eventId + '.' + extension);
+        return eventMapper.deleteById(eventId) > 0;
     }
 }
