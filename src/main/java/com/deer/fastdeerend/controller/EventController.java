@@ -73,19 +73,19 @@ public class EventController {
         }
     }
 
-    @GetMapping("selectEventListByUserId")
-    public HttpResponse<List<EventVo>> selectEventListByUserId(String userId) {
+    @GetMapping("selectEventListBySchoolId")
+    public HttpResponse<List<EventVo>> selectEventListBySchoolId(String schoolId) {
         HttpResponse.HttpResponseBuilder<List<EventVo>> builder = HttpResponse.builder();
-        if (!StringUtils.hasText(userId)) {
+        if (!StringUtils.hasText(schoolId)) {
             return builder
                     .code(HttpResponseStatusCodeSet.BadRequest.getValue())
-                    .msg("缺少userId参数")
+                    .msg("缺少schoolId参数")
                     .build();
         }
         return builder
                 .code(HttpResponseStatusCodeSet.OK.getValue())
                 .msg("查询成功")
-                .data(eventService.selectEventListByUserId(userId))
+                .data(eventService.selectEventListBySchoolId(schoolId))
                 .build();
     }
 

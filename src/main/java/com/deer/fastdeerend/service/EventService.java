@@ -10,7 +10,7 @@ import java.util.List;
 public interface EventService {
     public Boolean publishEvent(String userId, String date, String title, MultipartFile file, MultipartFile cover) throws IOException, ClientException;
 
-    public List<EventVo> selectEventListByUserId(String userId);
+    public List<EventVo> selectEventListBySchoolId(String userId);
 
     public List<EventVo> selectEventList();
 

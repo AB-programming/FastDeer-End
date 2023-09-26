@@ -84,4 +84,20 @@ public class JobController {
                 .data(jobService.selectAllJob())
                 .build();
     }
+
+    @GetMapping("/selectJobListBySchoolId")
+    public HttpResponse<List<JobVo>> selectJobListBySchoolId(@RequestParam("schoolId") String schoolId) {
+        HttpResponse.HttpResponseBuilder<List<JobVo>> builder = HttpResponse.builder();
+        if (!StringUtils.hasText(schoolId)) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少schoolId参数")
+                    .build();
+        }
+        return builder
+                .code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("查询成功")
+                .data(jobService.selectAllJob())
+                .build();
+    }
 }

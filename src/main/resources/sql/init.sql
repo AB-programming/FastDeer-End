@@ -232,17 +232,46 @@ DROP TABLE IF EXISTS job;
 
 CREATE TABLE `job`
 (
-    `job_id` varchar(255) primary key,
-    `job_name` varchar(255) not null,
-    `user_id` varchar(255) not null,
-    `degree` char(50),
-    `salary` char(50),
+    `job_id`      varchar(255) primary key,
+    `job_name`    varchar(255) not null,
+    `user_id`     varchar(255) not null,
+    `degree`      char(50),
+    `salary`      char(50),
     `description` text,
-    `company` char(64),
-    `date` char(50) not null,
-    `deadline` char(50),
-    `contact` char(64),
+    `company`     char(64),
+    `date`        char(50)     not null,
+    `deadline`    char(50),
+    `contact`     char(64),
     CONSTRAINT `fk_job_user` FOREIGN KEY (user_id) REFERENCES user (id)
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
- DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS volunteer;
+
+CREATE TABLE `volunteer`
+(
+    `volunteer_id` varchar(255) primary key,
+    `user_id`      varchar(255) not null,
+    `title`        varchar(255) not null,
+    `description`  text,
+    `date`         char(50)     not null,
+    `deadline`     char(50),
+    CONSTRAINT `fk_volunteer_user` FOREIGN KEY (user_id) REFERENCES user (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS volunteer_registration;
+
+CREATE TABLE `volunteer_registration`
+(
+    `volunteer_registration_id` varchar(255) primary key,
+    `user_id`                   varchar(255) not null,
+    `volunteer_id`              varchar(255) not null,
+    CONSTRAINT `fk_volunteer_registration_user` FOREIGN KEY (user_id) REFERENCES user (id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `fk_volunteer_registration_volunteer` FOREIGN KEY (volunteer_id) REFERENCES volunteer(volunteer_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;

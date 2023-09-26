@@ -1,5 +1,6 @@
 package com.deer.fastdeerend.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.deer.fastdeerend.dao.job.JobMapper;
 import com.deer.fastdeerend.dao.user.UserMapper;
 import com.deer.fastdeerend.domain.entity.job.Job;
@@ -46,6 +47,29 @@ public class JobServiceImpl implements JobService {
     @Override
     public List<JobVo> selectAllJob() {
         List<Job> jobs = jobMapper.selectList(null);
+        return jobs.parallelStream()
+                .map(job -> JobVo.builder()
+                        .jobId(job.getJobId())
+                        .jobName(job.getJobName())
+                        .userId(job.getUserId())
+                        .nickName(userMapper.selectById(job.getUserId()).getNickName())
+                        .avatar(userMapper.selectById(job.getUserId()).getAvatarUrl())
+                        .degree(job.getDegree())
+                        .salary(job.getSalary())
+                        .description(job.getDescription())
+                        .company(job.getCompany())
+                        .date(job.getDate())
+                        .deadline(job.getDeadline())
+                        .contact(job.getContact())
+                        .build())
+                .toList();
+    }
+
+    @Override
+    public List<JobVo> selectJobListBySchoolId(String schoolId) {
+        List<Job> jobs = jobMapper.selectList(new QueryWrapper<Job>()
+                .lambda()
+                .eq(Job::getUserId, schoolId));
         return jobs.parallelStream()
                 .map(job -> JobVo.builder()
                         .jobId(job.getJobId())

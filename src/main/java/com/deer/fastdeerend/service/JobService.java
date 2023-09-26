@@ -11,4 +11,6 @@ public interface JobService {
     public Boolean deleteJob(String jobId);
 
     public List<JobVo> selectAllJob();
+
+    public List<JobVo> selectJobListBySchoolId(String schoolId);
 }

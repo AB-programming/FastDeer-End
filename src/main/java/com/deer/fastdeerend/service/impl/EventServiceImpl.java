@@ -53,7 +53,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventVo> selectEventListByUserId(String userId) {
+    public List<EventVo> selectEventListBySchoolId(String userId) {
         List<Event> events = eventMapper.selectList(new QueryWrapper<Event>()
                 .lambda()
                 .eq(Event::getUserId, userId));
