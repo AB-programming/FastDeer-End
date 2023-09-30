@@ -99,6 +99,29 @@ public class VolunteerController {
                 .build();
     }
 
+    @DeleteMapping("/cancelVolunteer")
+    public HttpResponse<Boolean> cancelVolunteer(@RequestBody VolunteerRegistrationRequest volunteerRegistrationRequest) {
+        HttpResponse.HttpResponseBuilder<Boolean> builder = HttpResponse.builder();
+        if (!StringUtils.hasText(volunteerRegistrationRequest.getUserId())) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少userId参数")
+                    .build();
+        }
+        if (!StringUtils.hasText(volunteerRegistrationRequest.getVolunteerId())) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少volunteerId参数")
+                    .build();
+        }
+        return builder
+                .code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("取消报名成功")
+                .data(volunteerService.cancelVolunteer(volunteerRegistrationRequest.getUserId(),
+                        volunteerRegistrationRequest.getVolunteerId()))
+                .build();
+    }
+
     @GetMapping("/selectVolunteerListBySchoolId")
     public HttpResponse<List<VolunteerVo>> selectVolunteerListBySchool(@RequestParam("schoolId") String schoolId) {
         HttpResponse.HttpResponseBuilder<List<VolunteerVo>> builder = HttpResponse.builder();
@@ -114,4 +137,27 @@ public class VolunteerController {
                 .data(volunteerService.selectVolunteerListBySchoolId(schoolId))
                 .build();
     }
+
+    @GetMapping("/checkVolunteerRegistrationStatus")
+    public HttpResponse<Boolean> checkVolunteerRegistrationStatus(String userId, String volunteerId) {
+        HttpResponse.HttpResponseBuilder<Boolean> builder = HttpResponse.builder();
+        if (!StringUtils.hasText(userId)) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少userId参数")
+                    .build();
+        }
+        if (!StringUtils.hasText(volunteerId)) {
+            return builder
+                    .code(HttpResponseStatusCodeSet.BadRequest.getValue())
+                    .msg("缺少volunteerId参数")
+                    .build();
+        }
+        return builder
+                .code(HttpResponseStatusCodeSet.OK.getValue())
+                .msg("查询成功")
+                .data(volunteerService.checkVolunteerRegistrationStatus(userId, volunteerId))
+                .build();
+    }
+
 }

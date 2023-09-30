@@ -74,7 +74,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<User> selectAllUser() {
-        return userMapper.selectList(new QueryWrapper<User>().ne("role", "ROLE_admin"));
+        return userMapper.selectList(new QueryWrapper<User>()
+                .ne("role", "ROLE_admin")
+                .ne("role", "ROLE_school"));
     }
 
     @Override

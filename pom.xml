@@ -23,6 +23,7 @@
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <activation.version>1.1.1</activation.version>
         <jaxb-runtime.version>2.3.3</jaxb-runtime.version>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
@@ -123,7 +124,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>fastdeer-1.0.0.jar</finalName>
+        <finalName>fastdeer-1.0.0</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -1,17 +1,17 @@
 use fast_deer;
 
 INSERT INTO user (id, nick_name, avatar_url, gender, place, birth, school, major, qualification, graduation_date, role)
-VALUES ('1', '麋鹿', 'http://192.168.128.139:8081/static/avatar/1.jpg', '女', '台湾省-台北市-板桥市', '1999-07-15',
+VALUES ('1', '麋鹿', 'http://192.168.128.139:8080/static/avatar/1.jpg', '女', '台湾省-台北市-板桥市', '1999-07-15',
         '电子科技大学',
         '计算机科学与技术', '硕士', '2024-06-11', 'ROLE_user');
 
 insert into user(id, nick_name, avatar_url, gender, place, birth, school, major, qualification, graduation_date, role)
-VALUES ('2', '张三', 'http://192.168.128.139:8081/static/logo.jpg', '男', '辽宁省-大连市-西岗区', '2003-05-20',
+VALUES ('2', '张三', 'http://192.168.128.139:8080/static/logo.jpg', '男', '辽宁省-大连市-西岗区', '2003-05-20',
         '南京大学',
         '应用数学', '本科', '2025-09-05', 'ROLE_user');
 
 INSERT INTO user (id, nick_name, avatar_url, gender, place, birth, school, major, qualification, graduation_date, role)
-VALUES ('3', '李四', 'http://192.168.128.139:8081/static/logo.jpg', '女', '台湾省-台北市-板桥市', '1999-07-15',
+VALUES ('3', '李四', 'http://192.168.128.139:8080/static/logo.jpg', '女', '台湾省-台北市-板桥市', '1999-07-15',
         '电子科技大学',
         '计算机科学与技术', '硕士', '2024-06-11', 'ROLE_user');
 
@@ -19,7 +19,7 @@ VALUES ('3', '李四', 'http://192.168.128.139:8081/static/logo.jpg', '女', '�
 
 INSERT INTO user (id, nick_name, avatar_url, gender, place, birth, school, major, qualification, graduation_date, role)
 
-VALUES ('4', '王五', 'http://192.168.128.139:8081/static/logo.jpg', '男', '江苏省-南京市-玄武区', '2007-10-13',
+VALUES ('4', '王五', 'http://192.168.128.139:8080/static/logo.jpg', '男', '江苏省-南京市-玄武区', '2007-10-13',
         '华中科技大学',
         '土木工程', '本科', '2026-02-28', 'ROLE_user');
 
@@ -27,7 +27,7 @@ VALUES ('4', '王五', 'http://192.168.128.139:8081/static/logo.jpg', '男', '�
 
 INSERT INTO user (id, nick_name, avatar_url, gender, place, birth, school, major, qualification, graduation_date, role)
 
-VALUES ('5', '赵六', 'http://192.168.128.139:8081/static/logo.jpg', '女', '香港特别行政区-香港市-中西区', '2005-03-02',
+VALUES ('5', '赵六', 'http://192.168.128.139:8080/static/logo.jpg', '女', '香港特别行政区-香港市-中西区', '2005-03-02',
         '同济大学',
         '新闻传播学', '博士研究生', '2024-12-09', 'ROLE_user');
 
@@ -35,9 +35,15 @@ VALUES ('5', '赵六', 'http://192.168.128.139:8081/static/logo.jpg', '女', '�
 
 INSERT INTO user (id, nick_name, avatar_url, gender, place, birth, school, major, qualification, graduation_date, role)
 
-VALUES ('6', '孙七', 'http://192.168.128.139:8081/static/logo.jpg', '男', '四川省-成都市-武侯区', '2006-11-18',
+VALUES ('6', '孙七', 'http://192.168.128.139:8080/static/logo.jpg', '男', '四川省-成都市-武侯区', '2006-11-18',
         '大连理工大学',
         '金融学', '本科', '2026-04-25', 'ROLE_user');
+
+INSERT INTO user (id, nick_name, avatar_url, gender, place, birth, school, major, qualification, graduation_date, role)
+
+VALUES ('100', '山东交通学院', 'http://47.110.229.138:8080/static/avatar/100.jpg', '男', '', '',
+        '',
+        '', '', '', 'ROLE_school');
 
 # post
 insert into post(post_id, date, urls, text, title, browser_count, user_id)
@@ -559,3 +565,6 @@ INSERT INTO feedback(feedback_id, user_id, date, tag, rate, content, phone)
 VALUES ('1', '1', '2021-01-01', '问题', '4', 'Here have a bug', '13888888888');
 INSERT INTO feedback(feedback_id, user_id, date, tag, rate, content, phone)
 VALUES ('1', '1', '2021-01-01', '建议', '4', 'Very good', '13888888888');
+
+insert into school(school_id, user_id, password)
+VALUES ('1', '100', '123');

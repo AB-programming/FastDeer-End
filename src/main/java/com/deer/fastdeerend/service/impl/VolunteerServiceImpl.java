@@ -71,7 +71,7 @@ public class VolunteerServiceImpl implements VolunteerService {
                             .volunteerId(volunteer.getVolunteerId())
                             .userId(volunteer.getUserId())
                             .name(userMapper.selectById(volunteer.getUserId()).getNickName())
-                            .avatar(userMapper.selectById(volunteer.getUserId()).getNickName())
+                            .avatar(userMapper.selectById(volunteer.getUserId()).getAvatarUrl())
                             .title(volunteer.getTitle())
                             .description(volunteer.getDescription())
                             .date(volunteer.getDate())
@@ -90,6 +90,14 @@ public class VolunteerServiceImpl implements VolunteerService {
                 .userId(userId)
                 .volunteerId(volunteerId)
                 .build()) > 0;
+    }
+
+    @Override
+    public Boolean cancelVolunteer(String userId, String volunteerId) {
+        return volunteerRegistrationMapper.delete(new QueryWrapper<VolunteerRegistration>()
+                .lambda()
+                .eq(VolunteerRegistration::getUserId, userId)
+                .eq(VolunteerRegistration::getVolunteerId, volunteerId)) > 0;
     }
 
     @Override
@@ -119,7 +127,7 @@ public class VolunteerServiceImpl implements VolunteerService {
                             .volunteerId(volunteer.getVolunteerId())
                             .userId(volunteer.getUserId())
                             .name(userMapper.selectById(volunteer.getUserId()).getNickName())
-                            .avatar(userMapper.selectById(volunteer.getUserId()).getNickName())
+                            .avatar(userMapper.selectById(volunteer.getUserId()).getAvatarUrl())
                             .title(volunteer.getTitle())
                             .description(volunteer.getDescription())
                             .date(volunteer.getDate())
@@ -128,5 +136,13 @@ public class VolunteerServiceImpl implements VolunteerService {
                             .build();
                 })
                 .toList();
+    }
+
+    @Override
+    public Boolean checkVolunteerRegistrationStatus(String userId, String volunteerId) {
+        return volunteerRegistrationMapper.exists(new QueryWrapper<VolunteerRegistration>()
+                .lambda()
+                .eq(VolunteerRegistration::getUserId, userId)
+                .eq(VolunteerRegistration::getVolunteerId, volunteerId));
     }
 }

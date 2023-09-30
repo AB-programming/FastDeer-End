@@ -14,5 +14,9 @@ public interface VolunteerService {
 
     public Boolean applyVolunteer(String userId, String volunteerId);
 
+    public Boolean cancelVolunteer(String userId, String volunteerId);
+
     public List<VolunteerVo> selectVolunteerListBySchoolId(String schoolId);
+
+    public Boolean checkVolunteerRegistrationStatus(String userId, String volunteerId);
 }

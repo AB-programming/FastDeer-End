@@ -36,6 +36,7 @@ public class UrlScriptTest {
         List<User> users = userMapper.selectList(new QueryWrapper<>());
         for (User user : users) {
             if (user.getRole().equals("ROLE_admin")) continue;
+            if (user.getRole().equals("ROLE_school")) continue;
             String avatarUrl = user.getAvatarUrl();
             String[] split = avatarUrl.split("/");
             split[2] = address;

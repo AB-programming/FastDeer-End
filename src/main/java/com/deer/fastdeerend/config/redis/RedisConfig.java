@@ -79,7 +79,7 @@ public class RedisConfig {
      */
     RedisConnectionFactory redisConnectionFactory(int database) {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(host, port);
-//        config.setPassword(password);
+        config.setPassword(password);
         config.setDatabase(database);
 
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();

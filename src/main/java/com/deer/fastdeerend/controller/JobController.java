@@ -97,7 +97,7 @@ public class JobController {
         return builder
                 .code(HttpResponseStatusCodeSet.OK.getValue())
                 .msg("查询成功")
-                .data(jobService.selectAllJob())
+                .data(jobService.selectJobListBySchoolId(schoolId))
                 .build();
     }
 }
