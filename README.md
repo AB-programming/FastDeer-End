@@ -108,6 +108,9 @@ oss:
 
 使用其他地方的OSS也可以吧，具体怎么配置不太清楚，请看相应的文档，我也没用过
 
+然后就是数据相关，数据库用的MySQL，首先在您本机MySQL中建立`fast_deer`数据库，
+然后执行/src/main/resources/sql/init.sql。执行完可以执行mock.sql模拟一些假数据（可选）
+
 最后就是导入IDE之后，扫完缩印，按照常规启动Spring Boot的方式启动就好了
 
 ## 项目后续说明 🧱
